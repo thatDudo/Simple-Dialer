@@ -27,9 +27,11 @@ import com.simplemobiletools.dialer.extensions.*
 import com.simplemobiletools.dialer.helpers.DIALPAD_TONE_LENGTH_MS
 import com.simplemobiletools.dialer.helpers.ToneGeneratorHelper
 import com.simplemobiletools.dialer.models.SpeedDial
+import kotlinx.android.synthetic.main.activity_call.view.*
 import kotlinx.android.synthetic.main.activity_dialpad.*
 import kotlinx.android.synthetic.main.activity_dialpad.dialpad_holder
 import kotlinx.android.synthetic.main.dialpad.*
+import kotlinx.android.synthetic.main.dialpad.view.*
 import java.util.*
 import kotlin.math.roundToInt
 
@@ -92,9 +94,9 @@ class DialpadActivity : SimpleActivity() {
         setupCharClick(dialpad_asterisk_holder, '*', longClickable = false)
         setupCharClick(dialpad_hashtag_holder, '#', longClickable = false)
 
-        dialpad_clear_char.setOnClickListener { clearChar(it) }
-        dialpad_clear_char.setOnLongClickListener { clearInput(); true }
-        dialpad_call_button.setOnClickListener { initCall(dialpad_input.value, 0) }
+        dialpad_wrapper.dialpad_clear.setOnClickListener { clearChar(it) }
+        dialpad_wrapper.dialpad_clear.setOnLongClickListener { clearInput(); true }
+        dialpad_wrapper.dialpad_call.setOnClickListener { initCall(dialpad_input.value, 0) }
         dialpad_input.onTextChangeListener { dialpadValueChanged(it) }
         dialpad_input.requestFocus()
 
@@ -117,8 +119,8 @@ class DialpadActivity : SimpleActivity() {
         }
 
         val callIcon = resources.getColoredDrawableWithColor(callIconId, properPrimaryColor.getContrastColor())
-        dialpad_call_button.setImageDrawable(callIcon)
-        dialpad_call_button.background.applyColorFilter(properPrimaryColor)
+//        dialpad_wrapper.dialpad_call.setImageDrawable(callIcon)
+//        dialpad_wrapper.dialpad_call.background.applyColorFilter(properPrimaryColor)
 
         letter_fastscroller.textColor = getProperTextColor().getColorStateList()
         letter_fastscroller.pressedTextColor = properPrimaryColor
@@ -130,7 +132,7 @@ class DialpadActivity : SimpleActivity() {
     override fun onResume() {
         super.onResume()
         updateTextColors(dialpad_holder)
-        dialpad_clear_char.applyColorFilter(getProperTextColor())
+        dialpad_wrapper.dialpad_clear.applyColorFilter(getProperTextColor())
         updateNavigationBarColor(getBottomNavigationBackgroundColor())
         setupToolbar(dialpad_toolbar, NavigationIcon.Arrow)
     }

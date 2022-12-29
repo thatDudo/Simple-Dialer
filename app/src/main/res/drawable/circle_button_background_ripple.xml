@@ -5,7 +5,7 @@
         <layer-list>
             <item android:id="@+id/button_background_shape">
                 <shape android:shape="oval">
-                    <solid android:color="?attr/colorPrimary" />
+                    <solid android:color="@color/green" />
                     <corners android:radius="@dimen/material_button_corner_radius" />
                 </shape>
             </item>
