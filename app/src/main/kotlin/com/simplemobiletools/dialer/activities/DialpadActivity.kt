@@ -118,7 +118,7 @@ class DialpadActivity : SimpleActivity() {
             R.drawable.ic_phone_vector
         }
 
-        val callIcon = resources.getColoredDrawableWithColor(callIconId, properPrimaryColor.getContrastColor())
+//        val callIcon = resources.getColoredDrawableWithColor(callIconId, properPrimaryColor.getContrastColor())
 //        dialpad_wrapper.dialpad_call.setImageDrawable(callIcon)
 //        dialpad_wrapper.dialpad_call.background.applyColorFilter(properPrimaryColor)
 

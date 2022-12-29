@@ -386,14 +386,15 @@
             android:contentDescription="@string/call_number"
             android:elevation="@dimen/medium_margin"
             android:padding="@dimen/normal_margin"
-            android:src="@drawable/ic_dialpad_vector"/>
+            android:src="@drawable/ic_dialpad_vector"
+            app:tint="@color/md_grey_500" />
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/dialpad_call_holder"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/medium_margin"
+        android:layout_marginBottom="@dimen/activity_margin"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:contentDescription="@string/hashtag"
         app:layout_constraintStart_toEndOf="@+id/dialpad_shortcut_holder"
