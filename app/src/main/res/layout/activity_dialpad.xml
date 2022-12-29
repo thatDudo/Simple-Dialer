@@ -1,37 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/dialpad_coordinator"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/dialpad_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        app:menu="@menu/menu_dialpad"
-        app:titleTextAppearance="@style/AppTheme.ActionBar.TitleTextStyle" />
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/dialpad_holder"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentBottom="true"
         android:focusableInTouchMode="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/dialpad_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:paddingTop="@dimen/big_margin"
+            app:menu="@menu/menu_dialpad"
+            app:titleTextAppearance="@style/AppTheme.ActionBar.TitleTextStyle"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
 
         <TextView
             android:id="@+id/dialpad_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/medium_margin"
+            android:paddingVertical="@dimen/medium_margin"
             android:text="Telefon"
             android:textSize="@dimen/dialpad_title_size"
             android:textStyle="bold"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"/>
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/dialpad_list_wrapper"/>
 
         <EditText
             android:id="@+id/dialpad_input"
@@ -43,6 +47,8 @@
             android:layoutDirection="ltr"
             android:textCursorDrawable="@null"
             android:textSize="@dimen/dialpad_text_size"
+            android:autofillHints="false"
+            android:cursorVisible="false"
             android:backgroundTint="@color/transparent"
             app:layout_constraintTop_toBottomOf="@id/dialpad_title"
             app:layout_constraintEnd_toEndOf="parent"
@@ -50,7 +56,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/dialpad_list_wrapper"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="@drawable/dialpad_background"
             android:layout_marginHorizontal="20dp"
@@ -58,7 +64,8 @@
             app:layout_constraintTop_toBottomOf="@id/dialpad_input"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/dialpad_divider">
+            app:layout_constraintBottom_toTopOf="@id/dialpad_divider"
+            android:clipToOutline="true">
 
             <com.simplemobiletools.commons.views.MyTextView
                 android:id="@+id/dialpad_placeholder"

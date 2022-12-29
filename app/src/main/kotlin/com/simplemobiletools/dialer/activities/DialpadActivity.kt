@@ -13,10 +13,7 @@ import android.provider.Telephony.Sms.Intents.SECRET_CODE_ACTION
 import android.telephony.PhoneNumberUtils
 import android.telephony.TelephonyManager
 import android.util.TypedValue
-import android.view.KeyEvent
-import android.view.MotionEvent
-import android.view.View
-import android.view.ViewConfiguration
+import android.view.*
 import com.reddit.indicatorfastscroll.FastScrollItemIndicator
 import com.simplemobiletools.commons.extensions.*
 import com.simplemobiletools.commons.helpers.*
@@ -127,12 +124,17 @@ class DialpadActivity : SimpleActivity() {
         letter_fastscroller_thumb.setupWithFastScroller(letter_fastscroller)
         letter_fastscroller_thumb.textColor = properPrimaryColor.getContrastColor()
         letter_fastscroller_thumb.thumbColor = properPrimaryColor.getColorStateList()
+
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+        );
     }
 
     override fun onResume() {
         super.onResume()
         updateTextColors(dialpad_holder)
-//        dialpad_wrapper.dialpad_clear.applyColorFilter(getProperTextColor())
+        dialpad_wrapper.dialpad_clear.applyColorFilter(getProperTextColor())
 //        updateNavigationBarColor(getBottomNavigationBackgroundColor())
 //        setupToolbar(dialpad_toolbar, NavigationIcon.Arrow)
     }
