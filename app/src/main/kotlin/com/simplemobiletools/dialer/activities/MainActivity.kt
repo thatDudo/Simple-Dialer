@@ -15,7 +15,8 @@ import android.os.Handler
 import android.provider.Settings
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.ImageView
+import android.view.View
+import android.view.WindowManager
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
@@ -39,10 +40,12 @@ import com.simplemobiletools.dialer.helpers.OPEN_DIAL_PAD_AT_LAUNCH
 import com.simplemobiletools.dialer.helpers.RecentsHelper
 import com.simplemobiletools.dialer.helpers.tabsList
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.dialog_change_sorting.view.*
 import kotlinx.android.synthetic.main.fragment_contacts.*
 import kotlinx.android.synthetic.main.fragment_favorites.*
 import kotlinx.android.synthetic.main.fragment_recents.*
 import me.grantland.widget.AutofitHelper
+
 
 class MainActivity : SimpleActivity() {
     private var isSearchOpen = false
@@ -91,6 +94,11 @@ class MainActivity : SimpleActivity() {
 
         setupTabs()
         SimpleContact.sorting = config.sorting
+
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+        )
     }
 
     override fun onResume() {
@@ -99,9 +107,9 @@ class MainActivity : SimpleActivity() {
         val dialpadIcon = resources.getColoredDrawableWithColor(R.drawable.ic_dialpad_vector, properPrimaryColor.getContrastColor())
         main_dialpad_button.setImageDrawable(dialpadIcon)
 
-        setupTabColors()
-        setupToolbar(main_toolbar, searchMenuItem = mSearchMenuItem)
-        updateTextColors(main_holder)
+//        setupTabColors()
+//        setupToolbar(main_toolbar, searchMenuItem = mSearchMenuItem)
+//        updateTextColors(main_holder)
 
         getAllFragments().forEach {
             it?.setupColors(getProperTextColor(), getProperPrimaryColor(), getProperPrimaryColor())
@@ -278,7 +286,7 @@ class MainActivity : SimpleActivity() {
         }
 
         val bottomBarColor = getBottomNavigationBackgroundColor()
-        main_tabs_holder.setBackgroundColor(bottomBarColor)
+//        main_tabs_holder.setBackgroundColor(bottomBarColor)
         updateNavigationBarColor(bottomBarColor)
     }
 
@@ -338,10 +346,12 @@ class MainActivity : SimpleActivity() {
         main_tabs_holder.removeAllTabs()
         tabsList.forEachIndexed { index, value ->
             if (config.showTabs and value != 0) {
-                main_tabs_holder.newTab().setCustomView(R.layout.bottom_tablayout_item).apply {
-                    customView?.findViewById<ImageView>(R.id.tab_item_icon)?.setImageDrawable(getTabIcon(index))
+//                main_tabs_holder.addTab(main_tabs_holder.newTab().setText(getTabLabel(index)))
+                main_tabs_holder.newTab().setCustomView(R.layout.tab_item).apply {
                     customView?.findViewById<TextView>(R.id.tab_item_label)?.text = getTabLabel(index)
-                    AutofitHelper.create(customView?.findViewById(R.id.tab_item_label))
+                    if (index == tabsList.size -1)
+                        customView?.findViewById<View>(R.id.tab_item_divider)?.visibility = View.INVISIBLE
+//                    AutofitHelper.create(customView?.findViewById(R.id.tab_item_label))
                     main_tabs_holder.addTab(this)
                 }
             }
@@ -374,9 +384,9 @@ class MainActivity : SimpleActivity() {
 
     private fun getTabLabel(position: Int): String {
         val stringId = when (position) {
-            0 -> R.string.contacts_tab
-            1 -> R.string.favorites_tab
-            else -> R.string.call_history_tab
+            0 -> R.string.call_history_tab
+            1 -> R.string.contacts_tab
+            else -> R.string.favorites_tab
         }
 
         return resources.getString(stringId)

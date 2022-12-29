@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
-    android:background="@drawable/dialpad_background"
+    android:background="@drawable/tile_background"
     android:focusableInTouchMode="true"
     android:layoutDirection="ltr"
     android:paddingTop="@dimen/medium_margin"
