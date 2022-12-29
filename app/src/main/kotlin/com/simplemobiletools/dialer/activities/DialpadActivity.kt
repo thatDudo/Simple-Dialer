@@ -61,25 +61,25 @@ class DialpadActivity : SimpleActivity() {
 
         toneGeneratorHelper = ToneGeneratorHelper(this, DIALPAD_TONE_LENGTH_MS)
 
-        if (hasRussianLocale) {
-            initRussianChars()
-            dialpad_2_letters.append("\nАБВГ")
-            dialpad_3_letters.append("\nДЕЁЖЗ")
-            dialpad_4_letters.append("\nИЙКЛ")
-            dialpad_5_letters.append("\nМНОП")
-            dialpad_6_letters.append("\nРСТУ")
-            dialpad_7_letters.append("\nФХЦЧ")
-            dialpad_8_letters.append("\nШЩЪЫ")
-            dialpad_9_letters.append("\nЬЭЮЯ")
-
-            val fontSize = resources.getDimension(R.dimen.small_text_size)
-            arrayOf(
-                dialpad_2_letters, dialpad_3_letters, dialpad_4_letters, dialpad_5_letters, dialpad_6_letters, dialpad_7_letters, dialpad_8_letters,
-                dialpad_9_letters
-            ).forEach {
-                it.setTextSize(TypedValue.COMPLEX_UNIT_PX, fontSize)
-            }
-        }
+//        if (hasRussianLocale) {
+//            initRussianChars()
+//            dialpad_2_letters.append("\nАБВГ")
+//            dialpad_3_letters.append("\nДЕЁЖЗ")
+//            dialpad_4_letters.append("\nИЙКЛ")
+//            dialpad_5_letters.append("\nМНОП")
+//            dialpad_6_letters.append("\nРСТУ")
+//            dialpad_7_letters.append("\nФХЦЧ")
+//            dialpad_8_letters.append("\nШЩЪЫ")
+//            dialpad_9_letters.append("\nЬЭЮЯ")
+//
+//            val fontSize = resources.getDimension(R.dimen.small_text_size)
+//            arrayOf(
+//                dialpad_2_letters, dialpad_3_letters, dialpad_4_letters, dialpad_5_letters, dialpad_6_letters, dialpad_7_letters, dialpad_8_letters,
+//                dialpad_9_letters
+//            ).forEach {
+//                it.setTextSize(TypedValue.COMPLEX_UNIT_PX, fontSize)
+//            }
+//        }
 
         setupCharClick(dialpad_1_holder, '1')
         setupCharClick(dialpad_2_holder, '2')
@@ -132,9 +132,9 @@ class DialpadActivity : SimpleActivity() {
     override fun onResume() {
         super.onResume()
         updateTextColors(dialpad_holder)
-        dialpad_wrapper.dialpad_clear.applyColorFilter(getProperTextColor())
-        updateNavigationBarColor(getBottomNavigationBackgroundColor())
-        setupToolbar(dialpad_toolbar, NavigationIcon.Arrow)
+//        dialpad_wrapper.dialpad_clear.applyColorFilter(getProperTextColor())
+//        updateNavigationBarColor(getBottomNavigationBackgroundColor())
+//        setupToolbar(dialpad_toolbar, NavigationIcon.Arrow)
     }
 
     private fun setupOptionsMenu() {
