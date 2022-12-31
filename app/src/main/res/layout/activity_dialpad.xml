@@ -58,9 +58,10 @@
             android:id="@+id/dialpad_list_wrapper"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:minHeight="80dp"
             android:background="@drawable/tile_background"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginVertical="5dp"
+            android:layout_marginHorizontal="@dimen/tile_margin_hor"
+            android:layout_marginVertical="@dimen/tile_margin_ver"
             app:layout_constraintTop_toBottomOf="@id/dialpad_input"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -92,7 +93,9 @@
                 android:scrollbars="none"
                 app:layoutManager="com.simplemobiletools.commons.views.MyLinearLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:requiresFadingEdge="vertical"
+                android:fadingEdgeLength="14dp" />
 
             <com.reddit.indicatorfastscroll.FastScrollerView
                 android:id="@+id/letter_fastscroller"
@@ -126,8 +129,8 @@
             layout="@layout/dialpad"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginVertical="5dp"
+            android:layout_marginHorizontal="@dimen/tile_margin_hor"
+            android:layout_marginVertical="@dimen/tile_margin_ver"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

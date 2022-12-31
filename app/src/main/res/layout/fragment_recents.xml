@@ -5,41 +5,197 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.simplemobiletools.commons.views.MyTextView
-        android:id="@+id/recents_placeholder"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:alpha="0.8"
-        android:gravity="center"
-        android:paddingStart="@dimen/activity_margin"
-        android:paddingTop="@dimen/activity_margin"
-        android:paddingEnd="@dimen/activity_margin"
-        android:text="@string/no_previous_calls"
-        android:textSize="@dimen/bigger_text_size"
-        android:textStyle="italic"
-        android:visibility="gone" />
-
-    <com.simplemobiletools.commons.views.MyTextView
-        android:id="@+id/recents_placeholder_2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/recents_placeholder"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/ripple_all_corners"
-        android:gravity="center"
-        android:padding="@dimen/activity_margin"
-        android:text="@string/request_access"
-        android:textSize="@dimen/bigger_text_size"
-        android:visibility="gone" />
-
-    <com.simplemobiletools.commons.views.MyRecyclerView
-        android:id="@+id/recents_list"
+    <LinearLayout
+        android:id="@+id/dialpad_coordinator"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clipToPadding="false"
-        android:layoutAnimation="@anim/layout_animation"
-        android:scrollbars="none"
-        app:layoutManager="com.simplemobiletools.commons.views.MyLinearLayoutManager" />
+        android:orientation="vertical"
+        android:weightSum="100">
+
+        <TextView
+            android:id="@+id/dialpad_title"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:paddingVertical="@dimen/medium_margin"
+            android:layout_weight="15"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Telefon"
+            android:textAlignment="center"
+            android:textSize="@dimen/dialpad_title_size"
+            android:textStyle="bold"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/dialpad_holder"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="85"
+            android:focusableInTouchMode="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/dialpad_list_wrapper"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:minHeight="80dp"
+                android:layout_marginHorizontal="@dimen/tile_margin_hor"
+                android:layout_marginVertical="@dimen/tile_margin_ver"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/dialpad_wrapper"
+                android:clipToOutline="true">
+
+                <EditText
+                    android:id="@+id/dialpad_input"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginHorizontal="@dimen/activity_margin"
+                    android:gravity="center"
+                    android:inputType="phone"
+                    android:layoutDirection="ltr"
+                    android:textCursorDrawable="@null"
+                    android:textSize="@dimen/dialpad_text_size"
+                    android:autofillHints="false"
+                    android:cursorVisible="false"
+                    android:backgroundTint="@color/transparent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <com.simplemobiletools.commons.views.MyTextView
+                    android:id="@+id/dialpad_placeholder"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:alpha="0.8"
+                    android:gravity="center"
+                    android:paddingStart="@dimen/activity_margin"
+                    android:paddingTop="@dimen/big_margin"
+                    android:paddingEnd="@dimen/activity_margin"
+                    android:text="@string/no_contacts_found"
+                    android:textSize="@dimen/bigger_text_size"
+                    android:textStyle="italic"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/dialpad_input" />
+
+                <com.simplemobiletools.commons.views.MyTextView
+                    android:id="@+id/dialpad_placeholder_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:alpha="0.8"
+                    android:gravity="center"
+                    android:paddingStart="@dimen/activity_margin"
+                    android:paddingTop="@dimen/big_margin"
+                    android:paddingEnd="@dimen/activity_margin"
+                    android:text="@string/no_contacts_found"
+                    android:textSize="@dimen/bigger_text_size"
+                    android:textStyle="italic"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/dialpad_placeholder" />
+
+                <com.simplemobiletools.commons.views.MyRecyclerView
+                    android:id="@+id/dialpad_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:background="@drawable/tile_background"
+                    android:clipToPadding="false"
+                    android:scrollbars="none"
+                    app:layoutManager="com.simplemobiletools.commons.views.MyLinearLayoutManager"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/dialpad_input"
+                    android:requiresFadingEdge="vertical"
+                    android:fadingEdgeLength="14dp" />
+
+                <com.reddit.indicatorfastscroll.FastScrollerView
+                    android:id="@+id/letter_fastscroller"
+                    android:layout_width="32dp"
+                    android:layout_height="0dp"
+                    android:gravity="top"
+                    android:paddingTop="@dimen/medium_margin"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/dialpad_list" />
+
+                <com.reddit.indicatorfastscroll.FastScrollerThumbView
+                    android:id="@+id/letter_fastscroller_thumb"
+                    android:layout_width="@dimen/fab_size"
+                    android:layout_height="0dp"
+                    android:layout_marginEnd="@dimen/activity_margin"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/letter_fastscroller"
+                    app:layout_constraintTop_toTopOf="@+id/dialpad_list" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <include
+                android:id="@+id/dialpad_wrapper"
+                layout="@layout/dialpad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/tile_margin_hor"
+                android:layout_marginVertical="@dimen/tile_margin_ver"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <ImageView
+                android:id="@+id/dialpad_call_two_button"
+                android:layout_width="@dimen/dialpad_button_size_small"
+                android:layout_height="@dimen/dialpad_button_size_small"
+                android:layout_marginBottom="@dimen/activity_margin"
+                android:background="@drawable/circle_background"
+                android:contentDescription="@string/call_number"
+                android:elevation="@dimen/medium_margin"
+                android:padding="@dimen/normal_margin"
+                android:src="@drawable/ic_phone_two_vector"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/dialpad_wrapper"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/dialpad_wrapper" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
+
+    <!--    <com.simplemobiletools.commons.views.MyTextView-->
+<!--        android:id="@+id/recents_placeholder"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:alpha="0.8"-->
+<!--        android:gravity="center"-->
+<!--        android:paddingStart="@dimen/activity_margin"-->
+<!--        android:paddingTop="@dimen/activity_margin"-->
+<!--        android:paddingEnd="@dimen/activity_margin"-->
+<!--        android:text="@string/no_previous_calls"-->
+<!--        android:textSize="@dimen/bigger_text_size"-->
+<!--        android:textStyle="italic"-->
+<!--        android:visibility="gone" />-->
+
+<!--    <com.simplemobiletools.commons.views.MyTextView-->
+<!--        android:id="@+id/recents_placeholder_2"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@+id/recents_placeholder"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:background="@drawable/ripple_all_corners"-->
+<!--        android:gravity="center"-->
+<!--        android:padding="@dimen/activity_margin"-->
+<!--        android:text="@string/request_access"-->
+<!--        android:textSize="@dimen/bigger_text_size"-->
+<!--        android:visibility="gone" />-->
+
+<!--    <com.simplemobiletools.commons.views.MyRecyclerView-->
+<!--        android:id="@+id/recents_list"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:clipToPadding="false"-->
+<!--        android:layoutAnimation="@anim/layout_animation"-->
+<!--        android:scrollbars="none"-->
+<!--        app:layoutManager="com.simplemobiletools.commons.views.MyLinearLayoutManager" />-->
 
 </com.simplemobiletools.dialer.fragments.RecentsFragment>

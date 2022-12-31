@@ -29,7 +29,7 @@ abstract class MyViewPagerFragment(context: Context, attributeSet: AttributeSet)
 
     fun finishActMode() {
         (fragment_list?.adapter as? MyRecyclerViewAdapter)?.finishActMode()
-        (recents_list?.adapter as? MyRecyclerViewAdapter)?.finishActMode()
+        (dialpad_list?.adapter as? MyRecyclerViewAdapter)?.finishActMode()
     }
 
     abstract fun setupFragment()
