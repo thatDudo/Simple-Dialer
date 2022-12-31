@@ -234,7 +234,7 @@ class RecentCallsAdapter(
         }
 
         RecentsHelper(activity).removeRecentCalls(idsToRemove) {
-            recentCalls.removeAll(callsToRemove)
+            recentCalls.removeAll(callsToRemove.toSet())
             activity.runOnUiThread {
                 if (recentCalls.isEmpty()) {
                     refreshItemsListener?.refreshItems()
