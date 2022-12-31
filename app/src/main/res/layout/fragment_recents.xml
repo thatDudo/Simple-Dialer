@@ -181,6 +181,22 @@
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"/>
+
+                <com.simplemobiletools.commons.views.MyFloatingActionButton
+                    android:id="@+id/main_dialpad_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|end"
+                    android:layout_marginEnd="@dimen/bigger_margin"
+                    android:layout_marginBottom="@dimen/activity_margin"
+                    android:contentDescription="@string/dialpad"
+                    android:elevation="@dimen/medium_margin"
+                    android:padding="@dimen/activity_margin"
+                    android:src="@drawable/ic_dialpad_vector"
+                    app:backgroundTint="@color/color_primary"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:rippleColor="@color/pressed_item_foreground" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <include
@@ -190,6 +206,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/tile_margin_hor"
                 android:layout_marginVertical="@dimen/tile_margin_ver"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />

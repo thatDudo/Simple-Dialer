@@ -68,6 +68,7 @@ class RecentsFragment(context: Context, attributeSet: AttributeSet) : MyViewPage
 
         dialpad_list_wrapper.beGone()
         recents_list_wrapper.beVisible()
+        setDialpadVisibility(false)
 
         speedDialValues = activity!!.config.getSpeedDialValues()!!
         privateCursor = activity!!.getMyContactsCursor(favoritesOnly = false, withPhoneNumbersOnly = true)
@@ -90,7 +91,8 @@ class RecentsFragment(context: Context, attributeSet: AttributeSet) : MyViewPage
         dialpad_wrapper.dialpad_clear.setOnClickListener { clearChar(it) }
         dialpad_wrapper.dialpad_clear.setOnLongClickListener { clearInput(); true }
         dialpad_wrapper.dialpad_call.setOnClickListener { initCall(dialpad_input.value, 0) }
-        dialpad_wrapper.dialpad_shortcut.setOnClickListener {  }
+        dialpad_wrapper.dialpad_shortcut.setOnClickListener { setDialpadVisibility(false) }
+        main_dialpad_button.setOnClickListener{ setDialpadVisibility(true) }
 
         SimpleContactsHelper(activity!!).getAvailableContacts(false) { gotContacts(it) }
         dialpad_input.disableKeyboard()
@@ -120,6 +122,11 @@ class RecentsFragment(context: Context, attributeSet: AttributeSet) : MyViewPage
         letter_fastscroller_thumb.setupWithFastScroller(letter_fastscroller)
         letter_fastscroller_thumb.textColor = properPrimaryColor.getContrastColor()
         letter_fastscroller_thumb.thumbColor = properPrimaryColor.getColorStateList()
+    }
+
+    private fun setDialpadVisibility(state: Boolean) {
+        dialpad_wrapper.beVisibleIf(state)
+        main_dialpad_button.beGoneIf(state)
     }
 
     override fun setupColors(textColor: Int, primaryColor: Int, properPrimaryColor: Int) {

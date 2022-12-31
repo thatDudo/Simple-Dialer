@@ -103,9 +103,9 @@ class MainActivity : SimpleActivity() {
 
     override fun onResume() {
         super.onResume()
-        val properPrimaryColor = getProperPrimaryColor()
-        val dialpadIcon = resources.getColoredDrawableWithColor(R.drawable.ic_dialpad_vector, properPrimaryColor.getContrastColor())
-        main_dialpad_button.setImageDrawable(dialpadIcon)
+//        val properPrimaryColor = getProperPrimaryColor()
+//        val dialpadIcon = resources.getColoredDrawableWithColor(R.drawable.ic_dialpad_vector, properPrimaryColor.getContrastColor())
+//        main_dialpad_button.setImageDrawable(dialpadIcon)
 
 //        setupTabColors()
 //        setupToolbar(main_toolbar, searchMenuItem = mSearchMenuItem)
@@ -219,7 +219,7 @@ class MainActivity : SimpleActivity() {
         MenuItemCompat.setOnActionExpandListener(mSearchMenuItem, object : MenuItemCompat.OnActionExpandListener {
             override fun onMenuItemActionExpand(item: MenuItem?): Boolean {
                 isSearchOpen = true
-                main_dialpad_button.beGone()
+//                main_dialpad_button.beGone()
                 return true
             }
 
@@ -229,7 +229,7 @@ class MainActivity : SimpleActivity() {
                 }
 
                 isSearchOpen = false
-                main_dialpad_button.beVisible()
+//                main_dialpad_button.beVisible()
                 return true
             }
         })
@@ -327,9 +327,9 @@ class MainActivity : SimpleActivity() {
             }, 100L)
         }
 
-        main_dialpad_button.setOnClickListener {
-            launchDialpad()
-        }
+//        main_dialpad_button.setOnClickListener {
+//            launchDialpad()
+//        }
 
         view_pager.onGlobalLayout {
             refreshMenuItems()
@@ -409,9 +409,10 @@ class MainActivity : SimpleActivity() {
     }
 
     private fun launchDialpad() {
-        Intent(applicationContext, DialpadActivity::class.java).apply {
-            startActivity(this)
-        }
+//        Intent(applicationContext, DialpadActivity::class.java).apply {
+//            startActivity(this)
+//        }
+//        main_dialpad_button.beGone()
     }
 
     private fun refreshFragments() {
