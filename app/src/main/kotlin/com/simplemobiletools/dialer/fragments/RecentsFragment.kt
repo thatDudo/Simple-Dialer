@@ -1,5 +1,7 @@
 package com.simplemobiletools.dialer.fragments
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.annotation.SuppressLint
 import android.annotation.TargetApi
 import android.content.Context
@@ -17,6 +19,12 @@ import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewConfiguration
+import android.view.animation.AccelerateDecelerateInterpolator
+import android.view.animation.AccelerateInterpolator
+import android.view.animation.Animation
+import android.view.animation.LinearInterpolator
+import android.view.animation.ScaleAnimation
+import android.view.animation.Transformation
 import com.reddit.indicatorfastscroll.FastScrollItemIndicator
 import com.simplemobiletools.commons.dialogs.CallConfirmationDialog
 import com.simplemobiletools.commons.extensions.*
@@ -68,9 +76,9 @@ class RecentsFragment(context: Context, attributeSet: AttributeSet) : MyViewPage
 
         dialpad_list_wrapper.beGone()
         recents_list_wrapper.beVisible()
-        setDialpadVisibility(false)
+//        setDialpadVisibility(false)
 
-        speedDialValues = activity!!.config.getSpeedDialValues()!!
+        speedDialValues = activity!!.config.getSpeedDialValues()
         privateCursor = activity!!.getMyContactsCursor(favoritesOnly = false, withPhoneNumbersOnly = true)
 
         toneGeneratorHelper = ToneGeneratorHelper(activity!!, DIALPAD_TONE_LENGTH_MS)
@@ -125,6 +133,49 @@ class RecentsFragment(context: Context, attributeSet: AttributeSet) : MyViewPage
     }
 
     private fun setDialpadVisibility(state: Boolean) {
+//        if (state) {
+//            dialpadValueChanged(dialpad_input.value)
+//        }
+//        else {
+//            dialpad_list_wrapper.beGone()
+//            recents_list_wrapper.beVisible()
+//        }
+//
+//        dialpad_wrapper.beVisible()
+//        val dialpad_scale_anim = ScaleAnimation(
+//            1f, 1f, if (state) 0f else 1f, if (state) 1f else 0f,
+//            Animation.ABSOLUTE, 0f, Animation.RELATIVE_TO_SELF, 1f)
+//        dialpad_scale_anim.duration = 300
+//        dialpad_scale_anim.repeatCount = 0
+//        dialpad_scale_anim.interpolator = LinearInterpolator()
+//        dialpad_scale_anim.setAnimationListener(object : Animation.AnimationListener {
+//            override fun onAnimationStart(animation: Animation?) {
+//            }
+//
+//            override fun onAnimationEnd(animation: Animation?) {
+//                dialpad_wrapper.clearAnimation()
+//                if (state) {
+//                    dialpad_wrapper.scaleY = 1f
+//                }
+//                else {
+//                    dialpad_wrapper.scaleY = 0f
+//                }
+//                dialpad_wrapper.beVisibleIf(state)
+//            }
+//
+//            override fun onAnimationRepeat(animation: Animation?) {
+//            }
+//        })
+//        dialpad_wrapper.startAnimation(dialpad_scale_anim)
+
+//        dialpad_wrapper.animate()
+//            .scaleY(if (state) 1.0f else 0.0f)
+//            .setDuration(300)
+//            .setListener(object : AnimatorListenerAdapter() {
+//                override fun onAnimationEnd(animation: Animator) {
+//                    dialpad_wrapper.beVisibleIf(state)
+//                }
+//            })
         dialpad_wrapper.beVisibleIf(state)
         main_dialpad_button.beGoneIf(state)
     }

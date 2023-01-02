@@ -4,6 +4,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include layout="@layout/fragment_letters_layout" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="100">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:paddingVertical="@dimen/medium_margin"
+            android:layout_weight="15"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/contacts_tab"
+            android:textAlignment="center"
+            android:textSize="@dimen/dialpad_title_size"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="85">
+
+            <include layout="@layout/fragment_letters_layout"/>
+        </LinearLayout>
+    </LinearLayout>
 </com.simplemobiletools.dialer.fragments.ContactsFragment>
