@@ -101,19 +101,19 @@ class DialpadActivity : SimpleActivity() {
         dialpad_input.disableKeyboard()
 
         val properPrimaryColor = getProperPrimaryColor()
-        val callIconId = if (areMultipleSIMsAvailable()) {
-            val callIcon = resources.getColoredDrawableWithColor(R.drawable.ic_phone_two_vector, properPrimaryColor.getContrastColor())
-            dialpad_call_two_button.setImageDrawable(callIcon)
-            dialpad_call_two_button.background.applyColorFilter(properPrimaryColor)
-            dialpad_call_two_button.beVisible()
-            dialpad_call_two_button.setOnClickListener {
-                initCall(dialpad_input.value, 1)
-            }
-
-            R.drawable.ic_phone_one_vector
-        } else {
-            R.drawable.ic_phone_vector
-        }
+//        val callIconId = if (areMultipleSIMsAvailable()) {
+//            val callIcon = resources.getColoredDrawableWithColor(R.drawable.ic_phone_two_vector, properPrimaryColor.getContrastColor())
+//            dialpad_call_two_button.setImageDrawable(callIcon)
+//            dialpad_call_two_button.background.applyColorFilter(properPrimaryColor)
+//            dialpad_call_two_button.beVisible()
+//            dialpad_call_two_button.setOnClickListener {
+//                initCall(dialpad_input.value, 1)
+//            }
+//
+//            R.drawable.ic_phone_one_vector
+//        } else {
+//            R.drawable.ic_phone_vector
+//        }
 
 //        val callIcon = resources.getColoredDrawableWithColor(callIconId, properPrimaryColor.getContrastColor())
 //        dialpad_wrapper.dialpad_call.setImageDrawable(callIcon)

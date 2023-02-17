@@ -26,12 +26,11 @@
             android:textStyle="bold"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/dialpad_holder"
+            android:id="@+id/dialpad_holder_group"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="85"
             android:focusableInTouchMode="true"
-            android:animateLayoutChanges="true"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <androidx.constraintlayout.widget.ConstraintLayout
