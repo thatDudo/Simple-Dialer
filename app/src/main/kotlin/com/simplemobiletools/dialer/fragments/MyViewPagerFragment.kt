@@ -6,6 +6,7 @@ import android.widget.RelativeLayout
 import com.simplemobiletools.commons.adapters.MyRecyclerViewAdapter
 import com.simplemobiletools.commons.extensions.getProperPrimaryColor
 import com.simplemobiletools.commons.extensions.getProperTextColor
+import com.simplemobiletools.dialer.activities.MainActivity
 import com.simplemobiletools.dialer.activities.SimpleActivity
 import com.simplemobiletools.dialer.extensions.config
 import com.simplemobiletools.dialer.helpers.Config
@@ -13,14 +14,14 @@ import kotlinx.android.synthetic.main.fragment_letters_layout.view.*
 import kotlinx.android.synthetic.main.fragment_recents.view.*
 
 abstract class MyViewPagerFragment(context: Context, attributeSet: AttributeSet) : RelativeLayout(context, attributeSet) {
-    protected var activity: SimpleActivity? = null
+    protected var activity: MainActivity? = null
 
     private lateinit var config: Config
 
     fun setupFragment(activity: SimpleActivity) {
         config = activity.config
         if (this.activity == null) {
-            this.activity = activity
+            this.activity = activity as MainActivity
 
             setupFragment()
             setupColors(activity.getProperTextColor(), activity.getProperPrimaryColor(), activity.getProperPrimaryColor())

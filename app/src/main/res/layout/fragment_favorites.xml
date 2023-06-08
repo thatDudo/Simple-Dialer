@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.simplemobiletools.dialer.fragments.FavoritesFragment xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/favorites_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -21,6 +22,20 @@
             android:textAlignment="center"
             android:textSize="@dimen/dialpad_title_size"
             android:textStyle="bold" />
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/main_app_bar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/main_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:menu="@menu/menu"
+                app:titleTextAppearance="@style/AppTheme.ActionBar.TitleTextStyle" />
+        </com.google.android.material.appbar.AppBarLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"

@@ -25,6 +25,20 @@
             android:textSize="@dimen/dialpad_title_size"
             android:textStyle="bold"/>
 
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/main_app_bar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/main_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:menu="@menu/menu"
+                app:titleTextAppearance="@style/AppTheme.ActionBar.TitleTextStyle" />
+        </com.google.android.material.appbar.AppBarLayout>
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/dialpad_holder_group"
             android:layout_width="match_parent"
@@ -193,7 +207,6 @@
                     android:elevation="@dimen/medium_margin"
                     android:padding="@dimen/activity_margin"
                     android:src="@drawable/ic_dialpad_vector"
-                    app:backgroundTint="@color/color_primary"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:rippleColor="@color/pressed_item_foreground" />

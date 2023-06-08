@@ -43,6 +43,9 @@ import com.simplemobiletools.dialer.models.SpeedDial
 import kotlinx.android.synthetic.main.activity_dialpad.*
 import kotlinx.android.synthetic.main.dialpad.*
 import kotlinx.android.synthetic.main.dialpad.view.*
+import kotlinx.android.synthetic.main.fragment_contacts.contacts_fragment
+import kotlinx.android.synthetic.main.fragment_recents.main_toolbar
+import kotlinx.android.synthetic.main.fragment_recents.recents_fragment
 import kotlinx.android.synthetic.main.fragment_recents.view.*
 import java.util.*
 import kotlin.collections.ArrayList
@@ -72,6 +75,8 @@ class RecentsFragment(context: Context, attributeSet: AttributeSet) : MyViewPage
                 requestCallLogPermission()
             }
         }
+
+        setupOptionsMenu()
 
         dialpad_list_wrapper.beGone()
         recents_list_wrapper.beVisible()
@@ -129,6 +134,26 @@ class RecentsFragment(context: Context, attributeSet: AttributeSet) : MyViewPage
         letter_fastscroller_thumb.setupWithFastScroller(letter_fastscroller)
         letter_fastscroller_thumb.textColor = properPrimaryColor.getContrastColor()
         letter_fastscroller_thumb.thumbColor = properPrimaryColor.getColorStateList()
+    }
+
+    private fun setupOptionsMenu() {
+        activity!!.setupSearch(main_toolbar.menu)
+        main_toolbar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.clear_call_history -> activity!!.clearCallHistory()
+                R.id.create_new_contact -> activity!!.launchCreateNewContactIntent()
+                R.id.sort -> activity!!.showSortingDialog(showCustomSorting = false)
+                R.id.settings -> activity!!.launchSettings()
+                else -> return@setOnMenuItemClickListener false
+            }
+            return@setOnMenuItemClickListener true
+        }
+        main_toolbar.menu.apply {
+            findItem(R.id.clear_call_history).isVisible = true
+            findItem(R.id.sort).isVisible = false
+            findItem(R.id.create_new_contact).isVisible = false
+//            findItem(R.id.more_apps_from_us).isVisible = !resources.getBoolean(R.bool.hide_google_relations)
+        }
     }
 
     private fun setDialpadVisibility(visible: Boolean) {

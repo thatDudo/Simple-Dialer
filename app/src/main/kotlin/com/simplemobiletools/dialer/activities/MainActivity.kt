@@ -59,8 +59,6 @@ class MainActivity : SimpleActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         appLaunched(BuildConfig.APPLICATION_ID)
-        setupOptionsMenu()
-        refreshMenuItems()
 
         launchedDialer = savedInstanceState?.getBoolean(OPEN_DIAL_PAD_AT_LAUNCH) ?: false
 
@@ -164,31 +162,29 @@ class MainActivity : SimpleActivity() {
         }
     }
 
-    private fun refreshMenuItems() {
-        val currentFragment = getCurrentFragment()
-        main_toolbar.menu.apply {
-            findItem(R.id.clear_call_history).isVisible = currentFragment == recents_fragment
-            findItem(R.id.sort).isVisible = currentFragment != recents_fragment
-            findItem(R.id.create_new_contact).isVisible = currentFragment == contacts_fragment
-            findItem(R.id.more_apps_from_us).isVisible = !resources.getBoolean(R.bool.hide_google_relations)
-        }
-    }
-
-    private fun setupOptionsMenu() {
-        setupSearch(main_toolbar.menu)
-        main_toolbar.setOnMenuItemClickListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.clear_call_history -> clearCallHistory()
-                R.id.create_new_contact -> launchCreateNewContactIntent()
-                R.id.sort -> showSortingDialog(showCustomSorting = getCurrentFragment() is FavoritesFragment)
-                R.id.more_apps_from_us -> launchMoreAppsFromUsIntent()
-                R.id.settings -> launchSettings()
-                R.id.about -> launchAbout()
-                else -> return@setOnMenuItemClickListener false
-            }
-            return@setOnMenuItemClickListener true
-        }
-    }
+//    private fun refreshMenuItems() {
+//        val currentFragment = getCurrentFragment()
+//        main_toolbar.menu.apply {
+//            findItem(R.id.clear_call_history).isVisible = currentFragment == recents_fragment
+//            findItem(R.id.sort).isVisible = currentFragment != recents_fragment
+//            findItem(R.id.create_new_contact).isVisible = currentFragment == contacts_fragment
+////            findItem(R.id.more_apps_from_us).isVisible = !resources.getBoolean(R.bool.hide_google_relations)
+//        }
+//    }
+//
+//    private fun setupOptionsMenu() {
+//        setupSearch(main_toolbar.menu)
+//        main_toolbar.setOnMenuItemClickListener { menuItem ->
+//            when (menuItem.itemId) {
+//                R.id.clear_call_history -> clearCallHistory()
+//                R.id.create_new_contact -> launchCreateNewContactIntent()
+//                R.id.sort -> showSortingDialog(showCustomSorting = getCurrentFragment() is FavoritesFragment)
+//                R.id.settings -> launchSettings()
+//                else -> return@setOnMenuItemClickListener false
+//            }
+//            return@setOnMenuItemClickListener true
+//        }
+//    }
 
     private fun checkContactPermissions() {
         handlePermission(PERMISSION_READ_CONTACTS) {
@@ -196,7 +192,7 @@ class MainActivity : SimpleActivity() {
         }
     }
 
-    private fun setupSearch(menu: Menu) {
+    fun setupSearch(menu: Menu) {
         val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
         mSearchMenuItem = menu.findItem(R.id.search)
         (mSearchMenuItem!!.actionView as SearchView).apply {
@@ -235,7 +231,7 @@ class MainActivity : SimpleActivity() {
         })
     }
 
-    private fun clearCallHistory() {
+    fun clearCallHistory() {
         ConfirmationDialog(this, "", R.string.clear_history_confirmation) {
             RecentsHelper(this).removeAllRecentCalls(this) {
                 runOnUiThread {
@@ -304,7 +300,6 @@ class MainActivity : SimpleActivity() {
                 getAllFragments().forEach {
                     it?.finishActMode()
                 }
-                refreshMenuItems()
             }
         })
 
@@ -323,7 +318,6 @@ class MainActivity : SimpleActivity() {
                 }
 
                 main_tabs_holder.getTabAt(wantedTab)?.select()
-                refreshMenuItems()
             }, 100L)
         }
 
@@ -331,9 +325,9 @@ class MainActivity : SimpleActivity() {
 //            launchDialpad()
 //        }
 
-        view_pager.onGlobalLayout {
-            refreshMenuItems()
-        }
+//        view_pager.onGlobalLayout {
+//            refreshMenuItems()
+//        }
 
         if (config.openDialPadAtLaunch && !launchedDialer) {
             launchDialpad()
@@ -481,7 +475,7 @@ class MainActivity : SimpleActivity() {
         }
     }
 
-    private fun launchSettings() {
+    fun launchSettings() {
         closeSearch()
         hideKeyboard()
         startActivity(Intent(applicationContext, SettingsActivity::class.java))
@@ -504,7 +498,7 @@ class MainActivity : SimpleActivity() {
         startAboutActivity(R.string.app_name, licenses, BuildConfig.VERSION_NAME, faqItems, true)
     }
 
-    private fun showSortingDialog(showCustomSorting: Boolean) {
+    fun showSortingDialog(showCustomSorting: Boolean) {
         ChangeSortingDialog(this, showCustomSorting) {
             favorites_fragment?.refreshItems {
                 if (isSearchOpen) {

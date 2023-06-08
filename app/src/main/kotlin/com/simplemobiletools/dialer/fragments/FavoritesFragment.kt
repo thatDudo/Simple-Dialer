@@ -17,15 +17,19 @@ import com.simplemobiletools.dialer.R
 import com.simplemobiletools.dialer.activities.SimpleActivity
 import com.simplemobiletools.dialer.adapters.ContactsAdapter
 import com.simplemobiletools.dialer.extensions.config
+import com.simplemobiletools.dialer.extensions.launchCreateNewContactIntent
 import com.simplemobiletools.dialer.helpers.Converters
 import com.simplemobiletools.dialer.interfaces.RefreshItemsListener
 import kotlinx.android.synthetic.main.fragment_letters_layout.view.*
+import kotlinx.android.synthetic.main.fragment_recents.view.main_toolbar
+import kotlinx.android.synthetic.main.fragment_recents.view.recents_fragment
 import java.util.*
 
 class FavoritesFragment(context: Context, attributeSet: AttributeSet) : MyViewPagerFragment(context, attributeSet), RefreshItemsListener {
     private var allContacts = ArrayList<SimpleContact>()
 
     override fun setupFragment() {
+        setupOptionsMenu()
         val placeholderResId = if (context.hasPermission(PERMISSION_READ_CONTACTS)) {
             R.string.no_contacts_found
         } else {
@@ -34,6 +38,26 @@ class FavoritesFragment(context: Context, attributeSet: AttributeSet) : MyViewPa
 
         fragment_placeholder.text = context.getString(placeholderResId)
         fragment_placeholder_2.beGone()
+    }
+
+    private fun setupOptionsMenu() {
+        activity!!.setupSearch(main_toolbar.menu)
+        main_toolbar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.clear_call_history -> activity!!.clearCallHistory()
+                R.id.create_new_contact -> activity!!.launchCreateNewContactIntent()
+                R.id.sort -> activity!!.showSortingDialog(showCustomSorting = true)
+                R.id.settings -> activity!!.launchSettings()
+                else -> return@setOnMenuItemClickListener false
+            }
+            return@setOnMenuItemClickListener true
+        }
+        main_toolbar.menu.apply {
+            findItem(R.id.clear_call_history).isVisible = false
+            findItem(R.id.sort).isVisible = true
+            findItem(R.id.create_new_contact).isVisible = false
+//            findItem(R.id.more_apps_from_us).isVisible = !resources.getBoolean(R.bool.hide_google_relations)
+        }
     }
 
     override fun setupColors(textColor: Int, primaryColor: Int, properPrimaryColor: Int) {
