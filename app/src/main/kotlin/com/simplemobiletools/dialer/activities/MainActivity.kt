@@ -11,6 +11,7 @@ import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.provider.Settings
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -103,7 +104,7 @@ class MainActivity : SimpleActivity() {
         main_dialpad_button.setImageDrawable(dialpadIcon)
 
         updateTextColors(main_holder)
-        setupTabColors()
+//        setupTabColors()
 
         getAllFragments().forEach {
             it?.setupColors(getProperTextColor(), getProperPrimaryColor(), getProperPrimaryColor())
@@ -256,19 +257,19 @@ class MainActivity : SimpleActivity() {
             .build()
     }
 
-    private fun setupTabColors() {
-        val activeView = main_tabs_holder.getTabAt(view_pager.currentItem)?.customView
-        updateBottomTabItemColors(activeView, true, getSelectedTabDrawableIds()[view_pager.currentItem])
-
-        getInactiveTabIndexes(view_pager.currentItem).forEach { index ->
-            val inactiveView = main_tabs_holder.getTabAt(index)?.customView
-            updateBottomTabItemColors(inactiveView, false, getDeselectedTabDrawableIds()[index])
-        }
-
-        val bottomBarColor = getBottomNavigationBackgroundColor()
-        main_tabs_holder.setBackgroundColor(bottomBarColor)
-        updateNavigationBarColor(bottomBarColor)
-    }
+//    private fun setupTabColors() {
+//        val activeView = main_tabs_holder.getTabAt(view_pager.currentItem)?.customView
+//        updateBottomTabItemColors(activeView, true, getSelectedTabDrawableIds()[view_pager.currentItem])
+//
+//        getInactiveTabIndexes(view_pager.currentItem).forEach { index ->
+//            val inactiveView = main_tabs_holder.getTabAt(index)?.customView
+//            updateBottomTabItemColors(inactiveView, false, getDeselectedTabDrawableIds()[index])
+//        }
+//
+//        val bottomBarColor = getBottomNavigationBackgroundColor()
+//        main_tabs_holder.setBackgroundColor(bottomBarColor)
+//        updateNavigationBarColor(bottomBarColor)
+//    }
 
     private fun getInactiveTabIndexes(activeIndex: Int) = (0 until main_tabs_holder.tabCount).filter { it != activeIndex }
 
@@ -364,10 +365,12 @@ class MainActivity : SimpleActivity() {
         main_tabs_holder.removeAllTabs()
         tabsList.forEachIndexed { index, value ->
             if (config.showTabs and value != 0) {
-                main_tabs_holder.newTab().setCustomView(R.layout.bottom_tablayout_item).apply {
-                    customView?.findViewById<ImageView>(R.id.tab_item_icon)?.setImageDrawable(getTabIcon(index))
+                main_tabs_holder.newTab().setCustomView(R.layout.tab_item).apply {
+//                    customView?.findViewById<ImageView>(R.id.tab_item_icon)?.setImageDrawable(getTabIcon(index))
                     customView?.findViewById<TextView>(R.id.tab_item_label)?.text = getTabLabel(index)
-                    AutofitHelper.create(customView?.findViewById(R.id.tab_item_label))
+                    if (index == tabsList.size - 1)
+                        customView?.findViewById<View>(R.id.tab_item_divider)?.visibility = View.INVISIBLE
+//                    AutofitHelper.create(customView?.findViewById(R.id.tab_item_label))
                     main_tabs_holder.addTab(this)
                 }
             }
@@ -389,21 +392,21 @@ class MainActivity : SimpleActivity() {
         storedStartNameWithSurname = config.startNameWithSurname
     }
 
-    private fun getTabIcon(position: Int): Drawable {
-        val drawableId = when (position) {
-            0 -> R.drawable.ic_person_vector
-            1 -> R.drawable.ic_star_vector
-            else -> R.drawable.ic_clock_vector
-        }
-
-        return resources.getColoredDrawableWithColor(drawableId, getProperTextColor())
-    }
+//    private fun getTabIcon(position: Int): Drawable {
+//        val drawableId = when (position) {
+//            0 -> R.drawable.ic_person_vector
+//            1 -> R.drawable.ic_star_vector
+//            else -> R.drawable.ic_clock_vector
+//        }
+//
+//        return resources.getColoredDrawableWithColor(drawableId, getProperTextColor())
+//    }
 
     private fun getTabLabel(position: Int): String {
         val stringId = when (position) {
-            0 -> R.string.contacts_tab
-            1 -> R.string.favorites_tab
-            else -> R.string.call_history_tab
+            0 -> R.string.call_history_tab
+            1 -> R.string.contacts_tab
+            else -> R.string.favorites_tab
         }
 
         return resources.getString(stringId)
