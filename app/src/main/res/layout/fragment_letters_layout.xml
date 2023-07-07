@@ -5,7 +5,11 @@
     <RelativeLayout
         android:id="@+id/fragment_wrapper"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@drawable/tile_background"
+        android:clipToOutline="true"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginVertical="5dp">
 
         <com.simplemobiletools.commons.views.MyTextView
             android:id="@+id/fragment_placeholder"
