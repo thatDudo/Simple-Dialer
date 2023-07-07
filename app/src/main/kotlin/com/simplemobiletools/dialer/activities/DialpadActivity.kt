@@ -74,24 +74,24 @@ class DialpadActivity : SimpleActivity() {
             dialpad_0_holder.visibility = View.INVISIBLE
         }
 
-        arrayOf(
-            dialpad_0_holder,
-            dialpad_1_holder,
-            dialpad_2_holder,
-            dialpad_3_holder,
-            dialpad_4_holder,
-            dialpad_5_holder,
-            dialpad_6_holder,
-            dialpad_7_holder,
-            dialpad_8_holder,
-            dialpad_9_holder,
-            dialpad_plus_holder,
-            dialpad_asterisk_holder,
-            dialpad_hashtag_holder
-        ).forEach {
-            it.background = ResourcesCompat.getDrawable(resources, R.drawable.pill_background, theme)
-            it.background?.alpha = LOWER_ALPHA_INT
-        }
+//        arrayOf(
+//            dialpad_0_holder,
+//            dialpad_1_holder,
+//            dialpad_2_holder,
+//            dialpad_3_holder,
+//            dialpad_4_holder,
+//            dialpad_5_holder,
+//            dialpad_6_holder,
+//            dialpad_7_holder,
+//            dialpad_8_holder,
+//            dialpad_9_holder,
+//            dialpad_plus_holder,
+//            dialpad_asterisk_holder,
+//            dialpad_hashtag_holder
+//        ).forEach {
+//            it.background = ResourcesCompat.getDrawable(resources, R.drawable.pill_background, theme)
+//            it.background?.alpha = LOWER_ALPHA_INT
+//        }
 
         setupOptionsMenu()
         speedDialValues = config.getSpeedDialValues()
@@ -172,7 +172,7 @@ class DialpadActivity : SimpleActivity() {
 
     override fun onResume() {
         super.onResume()
-        updateTextColors(dialpad_holder)
+//        updateTextColors(dialpad_holder)
         dialpad_clear_char.applyColorFilter(getProperTextColor())
         updateNavigationBarColor(getProperBackgroundColor())
         setupToolbar(dialpad_toolbar, NavigationIcon.Arrow)
