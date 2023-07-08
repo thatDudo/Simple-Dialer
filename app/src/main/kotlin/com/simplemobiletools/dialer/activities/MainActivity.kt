@@ -5,6 +5,8 @@ import android.app.Activity
 import android.content.Intent
 import android.content.pm.ShortcutInfo
 import android.content.res.Configuration
+import android.graphics.Color
+import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.Icon
 import android.graphics.drawable.LayerDrawable
@@ -12,6 +14,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.provider.Settings
 import android.view.View
+import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -90,6 +93,23 @@ class MainActivity : SimpleActivity() {
         Contact.sorting = config.sorting
     }
 
+    fun mixColors(color1: Int, color2: Int, ratio: Double): Int {
+        val inverseRatio = 1 - ratio
+
+        val r1 = Color.red(color1)
+        val g1 = Color.green(color1)
+        val b1 = Color.blue(color1)
+
+        val r2 = Color.red(color2)
+        val g2 = Color.green(color2)
+        val b2 = Color.blue(color2)
+
+        val mixed_r = (r1 * ratio + r2 * inverseRatio).toInt()
+        val mixed_g = (g1 * ratio + g2 * inverseRatio).toInt()
+        val mixed_b = (b1 * ratio + b2 * inverseRatio).toInt()
+        return Color.rgb(mixed_r, mixed_g, mixed_b)
+    }
+
     override fun onResume() {
         super.onResume()
         if (storedShowTabs != config.showTabs) {
@@ -105,6 +125,13 @@ class MainActivity : SimpleActivity() {
 
         updateTextColors(main_holder)
 //        setupTabColors()
+
+        val backgroundColor = mixColors(getProperBackgroundColor(), 0x888888, 0.9)
+
+        view_pager.background.applyColorFilter(backgroundColor)
+        main_tabs_holder.background.applyColorFilter(backgroundColor)
+//        view_pager.background.applyColorFilter(0x292C35)
+        // view_pager.setBackgroundColor(0x292C35)
 
         getAllFragments().forEach {
             it?.setupColors(getProperTextColor(), getProperPrimaryColor(), getProperPrimaryColor())
@@ -205,7 +232,7 @@ class MainActivity : SimpleActivity() {
     }
 
     private fun updateMenuColors() {
-        updateStatusbarColor(getProperBackgroundColor())
+        // updateStatusbarColor(getProperBackgroundColor())
         main_menu.updateColors()
     }
 
@@ -379,11 +406,13 @@ class MainActivity : SimpleActivity() {
         main_tabs_holder.onTabSelectionChanged(
             tabUnselectedAction = {
                 updateBottomTabItemColors(it.customView, false, getDeselectedTabDrawableIds()[it.position])
+                it.customView?.findViewById<TextView>(R.id.tab_item_label)?.setTypeface(null, Typeface.NORMAL)
             },
             tabSelectedAction = {
                 main_menu.closeSearch()
                 view_pager.currentItem = it.position
                 updateBottomTabItemColors(it.customView, true, getSelectedTabDrawableIds()[it.position])
+                it.customView?.findViewById<TextView>(R.id.tab_item_label)?.setTypeface(null, Typeface.BOLD)
             }
         )
 

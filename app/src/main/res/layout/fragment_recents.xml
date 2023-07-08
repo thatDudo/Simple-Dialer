@@ -40,10 +40,6 @@
         android:clipToPadding="false"
         android:layoutAnimation="@anim/layout_animation"
         android:scrollbars="none"
-        android:background="@drawable/tile_background"
-        android:clipToOutline="true"
-        android:layout_marginHorizontal="15dp"
-        android:layout_marginVertical="5dp"
         app:layoutManager="com.simplemobiletools.commons.views.MyLinearLayoutManager" />
 
 </com.simplemobiletools.dialer.fragments.RecentsFragment>

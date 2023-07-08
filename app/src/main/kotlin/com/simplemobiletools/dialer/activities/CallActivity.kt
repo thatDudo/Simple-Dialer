@@ -1,10 +1,14 @@
 package com.simplemobiletools.dialer.activities
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.KeyguardManager
+import android.app.WallpaperManager
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import android.graphics.drawable.LayerDrawable
 import android.graphics.drawable.RippleDrawable
 import android.media.AudioManager
@@ -20,6 +24,7 @@ import android.view.WindowManager
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.OvershootInterpolator
 import android.widget.ImageView
+import androidx.core.app.ActivityCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.children
 import com.simplemobiletools.commons.extensions.*
@@ -76,6 +81,18 @@ class CallActivity : SimpleActivity() {
         addLockScreenFlags()
         CallManager.addListener(callCallback)
         updateCallContactInfo(CallManager.getPrimaryCall())
+
+        val wallpaperManager = WallpaperManager.getInstance(this)
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+        }
+        call_holder.background = wallpaperManager.drawable
     }
 
     override fun onNewIntent(intent: Intent?) {
@@ -86,11 +103,15 @@ class CallActivity : SimpleActivity() {
     override fun onResume() {
         super.onResume()
         updateState()
-        updateNavigationBarColor(getProperBackgroundColor())
-
-        if (config.isUsingSystemTheme) {
-            updateStatusbarColor(getProperBackgroundColor())
-        }
+//        updateNavigationBarColor(getProperBackgroundColor())
+//
+//        if (config.isUsingSystemTheme) {
+//            updateStatusbarColor(getProperBackgroundColor())
+//        }
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+        )
     }
 
     override fun onDestroy() {
@@ -189,24 +210,24 @@ class CallActivity : SimpleActivity() {
         dialpad_8_holder.setOnClickListener { dialpadPressed('8') }
         dialpad_9_holder.setOnClickListener { dialpadPressed('9') }
 
-        arrayOf(
-            dialpad_0_holder,
-            dialpad_1_holder,
-            dialpad_2_holder,
-            dialpad_3_holder,
-            dialpad_4_holder,
-            dialpad_5_holder,
-            dialpad_6_holder,
-            dialpad_7_holder,
-            dialpad_8_holder,
-            dialpad_9_holder,
-            dialpad_plus_holder,
-            dialpad_asterisk_holder,
-            dialpad_hashtag_holder
-        ).forEach {
-            it.background = ResourcesCompat.getDrawable(resources, R.drawable.pill_background, theme)
-            it.background?.alpha = LOWER_ALPHA_INT
-        }
+//        arrayOf(
+//            dialpad_0_holder,
+//            dialpad_1_holder,
+//            dialpad_2_holder,
+//            dialpad_3_holder,
+//            dialpad_4_holder,
+//            dialpad_5_holder,
+//            dialpad_6_holder,
+//            dialpad_7_holder,
+//            dialpad_8_holder,
+//            dialpad_9_holder,
+//            dialpad_plus_holder,
+//            dialpad_asterisk_holder,
+//            dialpad_hashtag_holder
+//        ).forEach {
+//            it.background = ResourcesCompat.getDrawable(resources, R.drawable.pill_background, theme)
+//            it.background?.alpha = LOWER_ALPHA_INT
+//        }
 
         dialpad_0_holder.setOnLongClickListener { dialpadPressed('+'); true }
         dialpad_asterisk_holder.setOnClickListener { dialpadPressed('*') }
