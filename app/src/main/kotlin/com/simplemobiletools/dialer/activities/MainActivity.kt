@@ -1,7 +1,9 @@
 package com.simplemobiletools.dialer.activities
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.WallpaperManager
 import android.content.Intent
 import android.content.pm.ShortcutInfo
 import android.content.res.Configuration
@@ -13,11 +15,13 @@ import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.provider.Settings
+import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.snackbar.Snackbar
 import com.simplemobiletools.commons.dialogs.ConfirmationDialog
@@ -38,6 +42,7 @@ import com.simplemobiletools.dialer.fragments.MyViewPagerFragment
 import com.simplemobiletools.dialer.helpers.OPEN_DIAL_PAD_AT_LAUNCH
 import com.simplemobiletools.dialer.helpers.RecentsHelper
 import com.simplemobiletools.dialer.helpers.tabsList
+import kotlinx.android.synthetic.main.activity_call.call_holder
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_contacts.*
 import kotlinx.android.synthetic.main.fragment_favorites.*
@@ -61,6 +66,7 @@ class MainActivity : SimpleActivity() {
 
         launchedDialer = savedInstanceState?.getBoolean(OPEN_DIAL_PAD_AT_LAUNCH) ?: false
 
+        checkStoragePermission()
         if (isDefaultDialer()) {
             checkContactPermissions()
 
@@ -239,6 +245,11 @@ class MainActivity : SimpleActivity() {
     private fun checkContactPermissions() {
         handlePermission(PERMISSION_READ_CONTACTS) {
             initFragments()
+        }
+    }
+
+    private fun checkStoragePermission() {
+        handlePermission(PERMISSION_READ_STORAGE) {
         }
     }
 
