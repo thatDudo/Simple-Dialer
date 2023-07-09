@@ -16,6 +16,7 @@ import android.telephony.TelephonyManager
 import android.transition.AutoTransition
 import android.transition.TransitionManager
 import android.util.AttributeSet
+import android.util.Log
 import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.View
@@ -24,10 +25,12 @@ import android.view.ViewGroup
 import android.widget.RelativeLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.updateLayoutParams
+import androidx.recyclerview.widget.RecyclerView
 import com.reddit.indicatorfastscroll.FastScrollItemIndicator
 import com.simplemobiletools.commons.dialogs.CallConfirmationDialog
 import com.simplemobiletools.commons.extensions.*
 import com.simplemobiletools.commons.helpers.*
+import com.simplemobiletools.commons.interfaces.RecyclerScrollCallback
 import com.simplemobiletools.commons.models.SimpleContact
 import com.simplemobiletools.dialer.R
 import com.simplemobiletools.dialer.activities.SimpleActivity
@@ -134,6 +137,24 @@ class RecentsFragment(context: Context, attributeSet: AttributeSet) : MyViewPage
         letter_fastscroller_thumb.setupWithFastScroller(letter_fastscroller)
         letter_fastscroller_thumb.textColor = properPrimaryColor.getContrastColor()
         letter_fastscroller_thumb.thumbColor = properPrimaryColor.getColorStateList()
+
+//        recents_list.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+//            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+//                super.onScrollStateChanged(recyclerView, newState)
+//            }
+//            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+//            }
+//        })
+        recents_list.recyclerScrollCallback = object : RecyclerScrollCallback {
+            override fun onScrolled(scrollY: Int) {
+                return
+            }
+        }
+    }
+
+    override fun onOverScrolled(scrollX: Int, scrollY: Int, clampedX: Boolean, clampedY: Boolean) {
+        super.onOverScrolled(scrollX, scrollY, clampedX, clampedY)
+
     }
 
     private fun setupOptionsMenu() {
