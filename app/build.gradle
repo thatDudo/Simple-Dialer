@@ -57,11 +57,12 @@ android {
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
-
-    lintOptions {
-        checkReleaseBuilds false
+    namespace 'com.simplemobiletools.dialer'
+    lint {
         abortOnError false
+        checkReleaseBuilds false
     }
+
 }
 
 dependencies {
