@@ -309,8 +309,7 @@
         android:id="@+id/incoming_call_holder"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="invisible"
-        tools:visibility="gone">
+        android:visibility="gone">
 
         <ImageView
             android:id="@+id/call_decline"
@@ -334,7 +333,6 @@
             android:layout_marginTop="@dimen/normal_margin"
             android:text="@string/decline"
             android:textSize="@dimen/bigger_text_size"
-            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="@+id/call_decline"
             app:layout_constraintStart_toStartOf="@+id/call_decline"
             app:layout_constraintTop_toBottomOf="@+id/call_decline" />
@@ -426,7 +424,6 @@
             android:elevation="@dimen/medium_margin"
             android:text="@string/accept"
             android:textSize="@dimen/bigger_text_size"
-            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="@+id/call_accept"
             app:layout_constraintStart_toStartOf="@+id/call_accept"
             app:layout_constraintTop_toBottomOf="@+id/call_accept" />
@@ -442,8 +439,7 @@
         android:orientation="vertical"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:visibility="gone">
+        app:layout_constraintStart_toStartOf="parent">
 
         <RelativeLayout
             android:id="@+id/dialpad_input_holder"

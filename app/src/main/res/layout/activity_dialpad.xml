@@ -71,9 +71,9 @@
         <TextView
             android:id="@+id/dialpad_divider"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="0.01dp"
             android:background="@drawable/divider"
-            android:visibility="gone"
+
             app:layout_constraintBottom_toTopOf="@+id/dialpad_input" />
 
         <com.simplemobiletools.commons.views.MyEditText
