@@ -82,10 +82,10 @@ class CallActivity : SimpleActivity() {
         CallManager.addListener(callCallback)
         updateCallContactInfo(CallManager.getPrimaryCall())
 
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            val wallpaperManager = WallpaperManager.getInstance(this)
-            call_holder.background = wallpaperManager.drawable
-        }
+//        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+//            val wallpaperManager = WallpaperManager.getInstance(this)
+//            call_holder.background = wallpaperManager.drawable
+//        }
     }
 
     override fun onNewIntent(intent: Intent?) {
