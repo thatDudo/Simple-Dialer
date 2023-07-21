@@ -5,7 +5,7 @@
         <layer-list>
             <item android:id="@+id/accept_call_background">
                 <shape android:shape="oval">
-                    <solid android:color="@color/md_green_700" />
+                    <solid android:color="#00ac34" />
                 </shape>
             </item>
 
