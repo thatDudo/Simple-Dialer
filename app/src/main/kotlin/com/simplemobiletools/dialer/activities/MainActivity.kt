@@ -321,9 +321,31 @@ class MainActivity : SimpleActivity() {
         return icons
     }
 
+    private fun getTabTitles(): ArrayList<String> {
+        val titles = ArrayList<String>();
+
+        if (TAB_CALL_HISTORY != 0) {
+            titles.add(getString(R.string.call_history_tab))
+        }
+
+        if (TAB_CONTACTS != 0) {
+            titles.add(getString(R.string.contacts_tab))
+        }
+
+        if (TAB_FAVORITES != 0) {
+            titles.add(getString(R.string.favorites_tab))
+        }
+
+        return titles
+    }
+
     private fun getDeselectedTabDrawableIds(): ArrayList<Int> {
         val showTabs = config.showTabs
         val icons = ArrayList<Int>()
+
+        if (showTabs and TAB_CALL_HISTORY != 0) {
+            icons.add(R.drawable.ic_clock_vector)
+        }
 
         if (showTabs and TAB_CONTACTS != 0) {
             icons.add(R.drawable.ic_person_outline_vector)
@@ -331,10 +353,6 @@ class MainActivity : SimpleActivity() {
 
         if (showTabs and TAB_FAVORITES != 0) {
             icons.add(R.drawable.ic_star_outline_vector)
-        }
-
-        if (showTabs and TAB_CALL_HISTORY != 0) {
-            icons.add(R.drawable.ic_clock_vector)
         }
 
         return icons
@@ -411,7 +429,10 @@ class MainActivity : SimpleActivity() {
                 it.customView?.findViewById<TextView>(R.id.tab_item_label)?.setTypeface(null, Typeface.NORMAL)
             },
             tabSelectedAction = {
-                main_menu.closeSearch()
+//                main_menu.closeSearch()
+                val title = getTabTitles()[it.position]
+                main_app_bar_layout.title = title
+                dialpad_title.text = title
                 view_pager.currentItem = it.position
                 updateBottomTabItemColors(it.customView, true, getSelectedTabDrawableIds()[it.position])
                 it.customView?.findViewById<TextView>(R.id.tab_item_label)?.setTypeface(null, Typeface.BOLD)
