@@ -19,6 +19,7 @@ import com.simplemobiletools.dialer.extensions.config
 import com.simplemobiletools.dialer.helpers.Converters
 import com.simplemobiletools.dialer.interfaces.RefreshItemsListener
 import kotlinx.android.synthetic.main.fragment_letters_layout.view.*
+import kotlinx.android.synthetic.main.fragment_recents.view.*
 import java.util.Locale
 
 class FavoritesFragment(context: Context, attributeSet: AttributeSet) : MyViewPagerFragment(context, attributeSet), RefreshItemsListener {
@@ -33,6 +34,11 @@ class FavoritesFragment(context: Context, attributeSet: AttributeSet) : MyViewPa
 
         fragment_placeholder.text = context.getString(placeholderResId)
         fragment_placeholder_2.beGone()
+
+//        top_toolbar.menu.apply {
+//            findItem(R.id.clear_call_history).isVisible = false
+//            findItem(R.id.create_new_contact).isVisible = false
+//        }
     }
 
     override fun setupColors(textColor: Int, primaryColor: Int, properPrimaryColor: Int) {

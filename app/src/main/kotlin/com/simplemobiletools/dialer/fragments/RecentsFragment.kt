@@ -18,9 +18,13 @@ import com.simplemobiletools.dialer.helpers.MIN_RECENTS_THRESHOLD
 import com.simplemobiletools.dialer.helpers.RecentsHelper
 import com.simplemobiletools.dialer.interfaces.RefreshItemsListener
 import com.simplemobiletools.dialer.models.RecentCall
+import kotlinx.android.synthetic.main.activity_main.main_menu
+import kotlinx.android.synthetic.main.fragment_contacts.contacts_fragment
+import kotlinx.android.synthetic.main.fragment_recents.recents_fragment
 import kotlinx.android.synthetic.main.fragment_recents.view.recents_list
 import kotlinx.android.synthetic.main.fragment_recents.view.recents_placeholder
 import kotlinx.android.synthetic.main.fragment_recents.view.recents_placeholder_2
+import kotlinx.android.synthetic.main.fragment_recents.view.*
 
 class RecentsFragment(context: Context, attributeSet: AttributeSet) : MyViewPagerFragment(context, attributeSet), RefreshItemsListener {
     private var allRecentCalls = listOf<RecentCall>()
@@ -40,6 +44,10 @@ class RecentsFragment(context: Context, attributeSet: AttributeSet) : MyViewPage
                 requestCallLogPermission()
             }
         }
+//        top_toolbar.menu.apply {
+//            // findItem(R.id.sort).isVisible = false
+//            findItem(R.id.create_new_contact).isVisible = false
+//        }
     }
 
     override fun setupColors(textColor: Int, primaryColor: Int, properPrimaryColor: Int) {

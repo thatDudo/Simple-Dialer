@@ -148,7 +148,7 @@ class DialpadActivity : SimpleActivity() {
         val callIconId = if (areMultipleSIMsAvailable()) {
             val callIcon = resources.getColoredDrawableWithColor(R.drawable.ic_phone_two_vector, properPrimaryColor.getContrastColor())
             dialpad_call_two_button.setImageDrawable(callIcon)
-            dialpad_call_two_button.background.applyColorFilter(properPrimaryColor)
+            // dialpad_call_two_button.background.applyColorFilter(properPrimaryColor)
             dialpad_call_two_button.beVisible()
             dialpad_call_two_button.setOnClickListener {
                 initCall(dialpad_input.value, 1)
@@ -161,7 +161,7 @@ class DialpadActivity : SimpleActivity() {
 
         val callIcon = resources.getColoredDrawableWithColor(callIconId, properPrimaryColor.getContrastColor())
         dialpad_call_button.setImageDrawable(callIcon)
-        dialpad_call_button.background.applyColorFilter(properPrimaryColor)
+        // dialpad_call_button.background.applyColorFilter(properPrimaryColor)
 
         letter_fastscroller.textColor = getProperTextColor().getColorStateList()
         letter_fastscroller.pressedTextColor = properPrimaryColor

@@ -10,26 +10,43 @@ import com.simplemobiletools.commons.extensions.getProperTextColor
 import com.simplemobiletools.commons.extensions.getSecondaryBackgroundColor
 import com.simplemobiletools.commons.helpers.SORT_BY_FIRST_NAME
 import com.simplemobiletools.commons.helpers.SORT_BY_SURNAME
+import com.simplemobiletools.dialer.R
 import com.simplemobiletools.dialer.activities.MainActivity
 import com.simplemobiletools.dialer.activities.SimpleActivity
 import com.simplemobiletools.dialer.adapters.ContactsAdapter
 import com.simplemobiletools.dialer.extensions.config
+import com.simplemobiletools.dialer.extensions.launchCreateNewContactIntent
 import com.simplemobiletools.dialer.helpers.Config
+import kotlinx.android.synthetic.main.activity_main.main_menu
 import kotlinx.android.synthetic.main.fragment_letters_layout.view.*
 import kotlinx.android.synthetic.main.fragment_recents.view.*
 
 abstract class MyViewPagerFragment(context: Context, attributeSet: AttributeSet) : RelativeLayout(context, attributeSet) {
-    protected var activity: SimpleActivity? = null
+    protected var activity: MainActivity? = null
 
     private lateinit var config: Config
 
     fun setupFragment(activity: SimpleActivity) {
         config = activity.config
         if (this.activity == null) {
-            this.activity = activity
+            this.activity = activity as MainActivity
 
             setupFragment()
-            page_content?.background?.applyColorFilter(context.getSecondaryBackgroundColor())
+
+//            top_toolbar.setOnMenuItemClickListener { menuItem ->
+//                when (menuItem.itemId) {
+////                R.id.search -> main_menu
+//                    R.id.clear_call_history -> activity.clearCallHistory()
+//                    R.id.create_new_contact -> activity.launchCreateNewContactIntent()
+//
+////                R.id.more_apps_from_us -> launchMoreAppsFromUsIntent()
+//                    R.id.settings -> activity.launchSettings()
+////                R.id.about -> launchAbout()
+//                    else -> return@setOnMenuItemClickListener false
+//                }
+//                return@setOnMenuItemClickListener true
+//            }
+
             setupColors(activity.getProperTextColor(), activity.getProperPrimaryColor(), activity.getProperPrimaryColor())
         }
     }

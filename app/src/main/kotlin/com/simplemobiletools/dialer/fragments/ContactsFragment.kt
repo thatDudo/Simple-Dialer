@@ -15,6 +15,7 @@ import com.simplemobiletools.dialer.extensions.launchCreateNewContactIntent
 import com.simplemobiletools.dialer.extensions.startContactDetailsIntent
 import com.simplemobiletools.dialer.interfaces.RefreshItemsListener
 import kotlinx.android.synthetic.main.fragment_letters_layout.view.*
+import kotlinx.android.synthetic.main.fragment_recents.view.*
 import java.util.*
 
 class ContactsFragment(context: Context, attributeSet: AttributeSet) : MyViewPagerFragment(context, attributeSet), RefreshItemsListener {
@@ -46,6 +47,10 @@ class ContactsFragment(context: Context, attributeSet: AttributeSet) : MyViewPag
                 }
             }
         }
+
+//        top_toolbar.menu.apply {
+//            findItem(R.id.clear_call_history).isVisible = false
+//        }
     }
 
     override fun setupColors(textColor: Int, primaryColor: Int, properPrimaryColor: Int) {

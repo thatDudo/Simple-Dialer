@@ -1,28 +1,24 @@
 package com.simplemobiletools.dialer.activities
 
-import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.app.WallpaperManager
 import android.content.Intent
 import android.content.pm.ShortcutInfo
 import android.content.res.Configuration
-import android.graphics.Color
 import android.graphics.Typeface
-import android.graphics.drawable.Drawable
 import android.graphics.drawable.Icon
 import android.graphics.drawable.LayerDrawable
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.provider.Settings
-import android.util.Log
-import android.view.Menu
 import android.view.View
-import android.view.WindowManager
-import android.widget.ImageView
+import android.view.ViewGroup.MarginLayoutParams
+import android.view.WindowInsets
 import android.widget.TextView
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.marginBottom
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.snackbar.Snackbar
 import com.simplemobiletools.commons.dialogs.ConfirmationDialog
@@ -38,17 +34,16 @@ import com.simplemobiletools.dialer.dialogs.ChangeSortingDialog
 import com.simplemobiletools.dialer.dialogs.FilterContactSourcesDialog
 import com.simplemobiletools.dialer.extensions.config
 import com.simplemobiletools.dialer.extensions.launchCreateNewContactIntent
-import com.simplemobiletools.dialer.fragments.FavoritesFragment
 import com.simplemobiletools.dialer.fragments.MyViewPagerFragment
 import com.simplemobiletools.dialer.helpers.OPEN_DIAL_PAD_AT_LAUNCH
 import com.simplemobiletools.dialer.helpers.RecentsHelper
 import com.simplemobiletools.dialer.helpers.tabsList
-import kotlinx.android.synthetic.main.activity_call.call_holder
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.view.main_menu
 import kotlinx.android.synthetic.main.fragment_contacts.*
 import kotlinx.android.synthetic.main.fragment_favorites.*
 import kotlinx.android.synthetic.main.fragment_recents.*
-import me.grantland.widget.AutofitHelper
+
 
 class MainActivity : SimpleActivity() {
     private var launchedDialer = false
@@ -111,13 +106,14 @@ class MainActivity : SimpleActivity() {
         updateMenuColors()
         val properPrimaryColor = getProperPrimaryColor()
         val dialpadIcon = resources.getColoredDrawableWithColor(R.drawable.ic_dialpad_vector, properPrimaryColor.getContrastColor())
+        val backgroundColor = getSecondaryBackgroundColor()
         main_dialpad_button.setImageDrawable(dialpadIcon)
 
         updateTextColors(main_holder)
 //        setupTabColors()
 
-//        view_pager.background.applyColorFilter(backgroundColor)
-        main_tabs_holder.background.applyColorFilter(getSecondaryBackgroundColor())
+        view_pager.background.applyColorFilter(backgroundColor)
+        main_tabs_holder.background.applyColorFilter(backgroundColor)
 //        view_pager.background.applyColorFilter(0x292C35)
         // view_pager.setBackgroundColor(0x292C35)
 
@@ -140,6 +136,19 @@ class MainActivity : SimpleActivity() {
         Handler().postDelayed({
             recents_fragment?.refreshItems()
         }, 2000)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            val insets = windowManager.currentWindowMetrics.windowInsets
+            val statusBarHeight = insets.getInsets(WindowInsetsCompat.Type.statusBars()).top //in pixels
+            val navigationBarHeight = insets.getInsets(WindowInsetsCompat.Type.navigationBars()).bottom //in pixels
+
+            val lp = main_tabs_holder.layoutParams as MarginLayoutParams
+            lp.bottomMargin = Math.max(0, lp.bottomMargin - navigationBarHeight)
+            main_tabs_holder.requestLayout()
+        } else {
+            TODO("VERSION.SDK_INT < R")
+        }
+
     }
 
     override fun onPause() {
@@ -181,11 +190,10 @@ class MainActivity : SimpleActivity() {
 
     private fun refreshMenuItems() {
         val currentFragment = getCurrentFragment()
-        main_menu.getToolbar().menu.apply {
+        top_toolbar.menu.apply {
             findItem(R.id.clear_call_history).isVisible = currentFragment == recents_fragment
-            findItem(R.id.sort).isVisible = currentFragment != recents_fragment
+            //findItem(R.id.sort).isVisible = currentFragment != recents_fragment
             findItem(R.id.create_new_contact).isVisible = currentFragment == contacts_fragment
-//            findItem(R.id.more_apps_from_us).isVisible = !resources.getBoolean(R.bool.hide_google_relations)
         }
     }
 
@@ -204,13 +212,13 @@ class MainActivity : SimpleActivity() {
             getCurrentFragment()?.onSearchQueryChanged(text)
         }
 
-        main_menu.getToolbar().setOnMenuItemClickListener { menuItem ->
+        top_toolbar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
 //                R.id.search -> main_menu
                 R.id.clear_call_history -> clearCallHistory()
                 R.id.create_new_contact -> launchCreateNewContactIntent()
-                R.id.sort -> showSortingDialog(showCustomSorting = getCurrentFragment() is FavoritesFragment)
-                R.id.filter -> showFilterDialog()
+//                R.id.sort -> showSortingDialog(showCustomSorting = getCurrentFragment() is FavoritesFragment)
+//                R.id.filter -> showFilterDialog()
 //                R.id.more_apps_from_us -> launchMoreAppsFromUsIntent()
                 R.id.settings -> launchSettings()
 //                R.id.about -> launchAbout()
@@ -236,7 +244,7 @@ class MainActivity : SimpleActivity() {
         }
     }
 
-    private fun clearCallHistory() {
+    fun clearCallHistory() {
         val confirmationText = "${getString(R.string.clear_history_confirmation)}\n\n${getString(R.string.cannot_be_undone)}"
         ConfirmationDialog(this, confirmationText) {
             RecentsHelper(this).removeAllRecentCalls(this) {
@@ -513,7 +521,7 @@ class MainActivity : SimpleActivity() {
     }
 
     @SuppressLint("MissingPermission")
-    private fun clearMissedCalls() {
+    fun clearMissedCalls() {
         try {
             // notification cancellation triggers MissedCallNotifier.clearMissedCalls() which, in turn,
             // should update the database and reset the cached missed call count in MissedCallNotifier.java
@@ -523,12 +531,12 @@ class MainActivity : SimpleActivity() {
         }
     }
 
-    private fun launchSettings() {
+    fun launchSettings() {
         hideKeyboard()
         startActivity(Intent(applicationContext, SettingsActivity::class.java))
     }
 
-    private fun launchAbout() {
+    fun launchAbout() {
         val licenses = LICENSE_GLIDE or LICENSE_INDICATOR_FAST_SCROLL or LICENSE_AUTOFITTEXTVIEW
 
         val faqItems = arrayListOf(
@@ -544,7 +552,7 @@ class MainActivity : SimpleActivity() {
         startAboutActivity(R.string.app_name, licenses, BuildConfig.VERSION_NAME, faqItems, true)
     }
 
-    private fun showSortingDialog(showCustomSorting: Boolean) {
+    fun showSortingDialog(showCustomSorting: Boolean) {
         ChangeSortingDialog(this, showCustomSorting) {
             favorites_fragment?.refreshItems {
                 if (main_menu.isSearchOpen) {
@@ -559,7 +567,7 @@ class MainActivity : SimpleActivity() {
             }
         }
     }
-    private fun showFilterDialog() {
+    fun showFilterDialog() {
         FilterContactSourcesDialog(this) {
             favorites_fragment?.refreshItems {
                 if (main_menu.isSearchOpen) {

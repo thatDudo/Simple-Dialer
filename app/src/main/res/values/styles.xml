@@ -1,6 +1,8 @@
 <resources>
 
-    <style name="AppTheme" parent="AppTheme.Base" />
+    <style name="AppTheme" parent="AppTheme.Base">
+        <item name="android:fontFamily">@font/product_sans</item>
+    </style>
 
     <style name="DialpadButtonStyle">
         <item name="android:layout_marginStart">@dimen/small_margin</item>

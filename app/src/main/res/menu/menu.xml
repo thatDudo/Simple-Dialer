@@ -9,31 +9,31 @@
         android:title="@string/search"
         android:actionViewClass="android.widget.SearchView"
         app:showAsAction="always|collapseActionView" />
-    <item
-        android:id="@+id/sort"
-        android:icon="@drawable/ic_sort_vector"
-        android:title="@string/sort_by"
-        app:showAsAction="always" />
-    <item
-        android:id="@+id/filter"
-        android:icon="@drawable/ic_filter_vector"
-        android:title="@string/filter"
-        app:showAsAction="always" />
+<!--    <item-->
+<!--        android:id="@+id/sort"-->
+<!--        android:icon="@drawable/ic_sort_vector"-->
+<!--        android:title="@string/sort_by"-->
+<!--        app:showAsAction="always" />-->
+<!--    <item-->
+<!--        android:id="@+id/filter"-->
+<!--        android:icon="@drawable/ic_filter_vector"-->
+<!--        android:title="@string/filter"-->
+<!--        app:showAsAction="always" />-->
     <item
         android:id="@+id/create_new_contact"
         android:icon="@drawable/ic_plus_vector"
         android:title="@string/create_new_contact"
-        app:showAsAction="always" />
+        app:showAsAction="collapseActionView" />
     <item
         android:id="@+id/clear_call_history"
         android:icon="@drawable/ic_delete_vector"
         android:title="@string/clear_call_history"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="collapseActionView" />
     <item
         android:id="@+id/settings"
         android:icon="@drawable/ic_settings_cog_vector"
         android:title="@string/settings"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="collapseActionView" />
 <!--    <item-->
 <!--        android:id="@+id/about"-->
 <!--        android:icon="@drawable/ic_info_vector"-->
