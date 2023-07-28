@@ -16,6 +16,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.provider.Settings
 import android.util.Log
+import android.view.Menu
 import android.view.View
 import android.view.WindowManager
 import android.widget.ImageView
@@ -99,23 +100,6 @@ class MainActivity : SimpleActivity() {
         Contact.sorting = config.sorting
     }
 
-    fun mixColors(color1: Int, color2: Int, ratio: Double): Int {
-        val inverseRatio = 1 - ratio
-
-        val r1 = Color.red(color1)
-        val g1 = Color.green(color1)
-        val b1 = Color.blue(color1)
-
-        val r2 = Color.red(color2)
-        val g2 = Color.green(color2)
-        val b2 = Color.blue(color2)
-
-        val mixed_r = (r1 * ratio + r2 * inverseRatio).toInt()
-        val mixed_g = (g1 * ratio + g2 * inverseRatio).toInt()
-        val mixed_b = (b1 * ratio + b2 * inverseRatio).toInt()
-        return Color.rgb(mixed_r, mixed_g, mixed_b)
-    }
-
     override fun onResume() {
         super.onResume()
         if (storedShowTabs != config.showTabs) {
@@ -132,10 +116,8 @@ class MainActivity : SimpleActivity() {
         updateTextColors(main_holder)
 //        setupTabColors()
 
-        val backgroundColor = mixColors(getProperBackgroundColor(), 0x888888, 0.9)
-
-        view_pager.background.applyColorFilter(backgroundColor)
-        main_tabs_holder.background.applyColorFilter(backgroundColor)
+//        view_pager.background.applyColorFilter(backgroundColor)
+        main_tabs_holder.background.applyColorFilter(getSecondaryBackgroundColor())
 //        view_pager.background.applyColorFilter(0x292C35)
         // view_pager.setBackgroundColor(0x292C35)
 
@@ -203,7 +185,7 @@ class MainActivity : SimpleActivity() {
             findItem(R.id.clear_call_history).isVisible = currentFragment == recents_fragment
             findItem(R.id.sort).isVisible = currentFragment != recents_fragment
             findItem(R.id.create_new_contact).isVisible = currentFragment == contacts_fragment
-            findItem(R.id.more_apps_from_us).isVisible = !resources.getBoolean(R.bool.hide_google_relations)
+//            findItem(R.id.more_apps_from_us).isVisible = !resources.getBoolean(R.bool.hide_google_relations)
         }
     }
 
@@ -224,13 +206,14 @@ class MainActivity : SimpleActivity() {
 
         main_menu.getToolbar().setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
+//                R.id.search -> main_menu
                 R.id.clear_call_history -> clearCallHistory()
                 R.id.create_new_contact -> launchCreateNewContactIntent()
                 R.id.sort -> showSortingDialog(showCustomSorting = getCurrentFragment() is FavoritesFragment)
                 R.id.filter -> showFilterDialog()
-                R.id.more_apps_from_us -> launchMoreAppsFromUsIntent()
+//                R.id.more_apps_from_us -> launchMoreAppsFromUsIntent()
                 R.id.settings -> launchSettings()
-                R.id.about -> launchAbout()
+//                R.id.about -> launchAbout()
                 else -> return@setOnMenuItemClickListener false
             }
             return@setOnMenuItemClickListener true

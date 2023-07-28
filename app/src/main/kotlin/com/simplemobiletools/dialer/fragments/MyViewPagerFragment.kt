@@ -4,8 +4,10 @@ import android.content.Context
 import android.util.AttributeSet
 import android.widget.RelativeLayout
 import com.simplemobiletools.commons.adapters.MyRecyclerViewAdapter
+import com.simplemobiletools.commons.extensions.applyColorFilter
 import com.simplemobiletools.commons.extensions.getProperPrimaryColor
 import com.simplemobiletools.commons.extensions.getProperTextColor
+import com.simplemobiletools.commons.extensions.getSecondaryBackgroundColor
 import com.simplemobiletools.commons.helpers.SORT_BY_FIRST_NAME
 import com.simplemobiletools.commons.helpers.SORT_BY_SURNAME
 import com.simplemobiletools.dialer.activities.MainActivity
@@ -27,6 +29,7 @@ abstract class MyViewPagerFragment(context: Context, attributeSet: AttributeSet)
             this.activity = activity
 
             setupFragment()
+            page_content?.background?.applyColorFilter(context.getSecondaryBackgroundColor())
             setupColors(activity.getProperTextColor(), activity.getProperPrimaryColor(), activity.getProperPrimaryColor())
         }
     }

@@ -13,4 +13,8 @@
     <!-- keep these 2 values in dp to avoid scaling -->
     <dimen name="dialpad_text_size">28dp</dimen>
     <dimen name="dialpad_letters_text_size">12dp</dimen>
+
+    <dimen name="dialpad_title_size">40sp</dimen>
+    <dimen name="tile_margin_hor">15dp</dimen>
+    <dimen name="tile_margin_ver">5dp</dimen>
 </resources>
