@@ -475,16 +475,16 @@ class MainActivity : SimpleActivity() {
         val showTabs = config.showTabs
         val fragments = arrayListOf<MyViewPagerFragment?>()
 
+        if (showTabs and TAB_CALL_HISTORY > 0) {
+            fragments.add(recents_fragment)
+        }
+
         if (showTabs and TAB_CONTACTS > 0) {
             fragments.add(contacts_fragment)
         }
 
         if (showTabs and TAB_FAVORITES > 0) {
             fragments.add(favorites_fragment)
-        }
-
-        if (showTabs and TAB_CALL_HISTORY > 0) {
-            fragments.add(recents_fragment)
         }
 
         return fragments
