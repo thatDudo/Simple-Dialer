@@ -68,7 +68,7 @@ class MainActivity : SimpleActivity() {
 
         checkStoragePermission()
         if (isDefaultDialer()) {
-//            checkContactPermissions()
+            checkContactPermissions()
 
             if (!config.wasOverlaySnackbarConfirmed && !Settings.canDrawOverlays(this)) {
                 val snackbar = Snackbar.make(main_holder, R.string.allow_displaying_over_other_apps, Snackbar.LENGTH_INDEFINITE).setAction(R.string.ok) {
