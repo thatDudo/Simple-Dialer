@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
-
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/dialpad_coordinator"
         android:layout_width="match_parent"
@@ -39,14 +38,6 @@
                 android:backgroundTint="@color/transparent"
                 android:clipToOutline="true">
 
-<!--                <RelativeLayout-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="0dp"-->
-<!--                    app:layout_constraintTop_toTopOf="parent"-->
-<!--                    app:layout_constraintBottom_toTopOf="@id/main_tabs_holder"-->
-<!--                    android:layout_marginHorizontal="15dp"-->
-<!--                    android:layout_marginVertical="5dp">-->
-
                 <com.google.android.material.appbar.AppBarLayout
                     android:id="@+id/top_app_bar_layout"
                     android:layout_width="match_parent"
@@ -64,6 +55,7 @@
                         app:layout_constraintVertical_weight="100"
                         android:background="@null"
                         app:collapsedTitleGravity="left"
+                        app:collapsedTitleTextAppearance="@style/ActionBar.MyTitleStyle"
                         app:expandedTitleGravity="center|top"
                         app:title="@string/call_history_tab"
                         app:titleEnabled="true"
@@ -97,13 +89,6 @@
                     </com.google.android.material.appbar.CollapsingToolbarLayout>
                 </com.google.android.material.appbar.AppBarLayout>
 
-                <!--                <View-->
-                <!--                    android:id="@+id/view_pager_background"-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="match_parent"-->
-                <!--                    android:background="@drawable/tile_background"-->
-                <!--                    android:clipToOutline="true"/>-->
-
                 <com.simplemobiletools.commons.views.MyViewPager
                     android:id="@+id/view_pager"
                     android:layout_width="match_parent"
@@ -113,7 +98,6 @@
                     android:isScrollContainer="true"
                     android:clipToOutline="true"
                     app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
-                <!--            </RelativeLayout>-->
 
             </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
@@ -148,14 +132,6 @@
                 app:tabRippleColor="@null" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-<!--        <com.simplemobiletools.commons.views.MySearchMenu-->
-<!--            android:id="@+id/main_menu"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content">-->
-
-
-<!--            </com.simplemobiletools.commons.views.MySearchMenu>-->
 
         <com.simplemobiletools.dialer.activities.MySearchMenu2
             android:id="@+id/main_menu"
