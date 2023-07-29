@@ -9,16 +9,16 @@
         android:title="@string/search"
         android:actionViewClass="android.widget.SearchView"
         app:showAsAction="always|collapseActionView" />
-<!--    <item-->
-<!--        android:id="@+id/sort"-->
-<!--        android:icon="@drawable/ic_sort_vector"-->
-<!--        android:title="@string/sort_by"-->
-<!--        app:showAsAction="always" />-->
-<!--    <item-->
-<!--        android:id="@+id/filter"-->
-<!--        android:icon="@drawable/ic_filter_vector"-->
-<!--        android:title="@string/filter"-->
-<!--        app:showAsAction="always" />-->
+    <item
+        android:id="@+id/sort"
+        android:icon="@drawable/ic_sort_vector"
+        android:title="@string/sort_by"
+        app:showAsAction="collapseActionView" />
+    <item
+        android:id="@+id/filter"
+        android:icon="@drawable/ic_filter_vector"
+        android:title="@string/filter"
+        app:showAsAction="collapseActionView" />
     <item
         android:id="@+id/create_new_contact"
         android:icon="@drawable/ic_plus_vector"

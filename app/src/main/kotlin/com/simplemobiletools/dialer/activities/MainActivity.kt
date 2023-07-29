@@ -34,6 +34,7 @@ import com.simplemobiletools.dialer.dialogs.ChangeSortingDialog
 import com.simplemobiletools.dialer.dialogs.FilterContactSourcesDialog
 import com.simplemobiletools.dialer.extensions.config
 import com.simplemobiletools.dialer.extensions.launchCreateNewContactIntent
+import com.simplemobiletools.dialer.fragments.FavoritesFragment
 import com.simplemobiletools.dialer.fragments.MyViewPagerFragment
 import com.simplemobiletools.dialer.helpers.OPEN_DIAL_PAD_AT_LAUNCH
 import com.simplemobiletools.dialer.helpers.RecentsHelper
@@ -192,7 +193,7 @@ class MainActivity : SimpleActivity() {
         val currentFragment = getCurrentFragment()
         top_toolbar.menu.apply {
             findItem(R.id.clear_call_history).isVisible = currentFragment == recents_fragment
-            //findItem(R.id.sort).isVisible = currentFragment != recents_fragment
+            findItem(R.id.sort).isVisible = currentFragment != recents_fragment
             findItem(R.id.create_new_contact).isVisible = currentFragment == contacts_fragment
         }
     }
@@ -217,8 +218,8 @@ class MainActivity : SimpleActivity() {
 //                R.id.search -> main_menu
                 R.id.clear_call_history -> clearCallHistory()
                 R.id.create_new_contact -> launchCreateNewContactIntent()
-//                R.id.sort -> showSortingDialog(showCustomSorting = getCurrentFragment() is FavoritesFragment)
-//                R.id.filter -> showFilterDialog()
+                R.id.sort -> showSortingDialog(showCustomSorting = getCurrentFragment() is FavoritesFragment)
+                R.id.filter -> showFilterDialog()
 //                R.id.more_apps_from_us -> launchMoreAppsFromUsIntent()
                 R.id.settings -> launchSettings()
 //                R.id.about -> launchAbout()
