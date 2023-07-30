@@ -138,6 +138,7 @@ class MainActivity : SimpleActivity() {
             recents_fragment?.refreshItems()
         }, 2000)
 
+        // Adjust bottom margin based on navigation bar height
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             val insets = windowManager.currentWindowMetrics.windowInsets
             val statusBarHeight = insets.getInsets(WindowInsetsCompat.Type.statusBars()).top //in pixels
@@ -146,10 +147,12 @@ class MainActivity : SimpleActivity() {
             val lp = main_tabs_holder.layoutParams as MarginLayoutParams
             lp.bottomMargin = Math.max(0, lp.bottomMargin - navigationBarHeight)
             main_tabs_holder.requestLayout()
-        } else {
-            TODO("VERSION.SDK_INT < R")
         }
 
+        // Update actionbar height to 25% of screen height
+        val displayHeight = resources.displayMetrics.heightPixels
+        dialpad_title.layoutParams.height = displayHeight / 4
+        dialpad_title.requestLayout()
     }
 
     override fun onPause() {
@@ -553,7 +556,7 @@ class MainActivity : SimpleActivity() {
         }
     }
 
-    fun launchSettings() {
+    private fun launchSettings() {
         hideKeyboard()
         startActivity(Intent(applicationContext, SettingsActivity::class.java))
     }
@@ -574,7 +577,7 @@ class MainActivity : SimpleActivity() {
         startAboutActivity(R.string.app_name, licenses, BuildConfig.VERSION_NAME, faqItems, true)
     }
 
-    fun showSortingDialog(showCustomSorting: Boolean) {
+    private fun showSortingDialog(showCustomSorting: Boolean) {
         ChangeSortingDialog(this, showCustomSorting) {
             favorites_fragment?.refreshItems {
                 if (main_menu.isSearchOpen) {
@@ -589,7 +592,7 @@ class MainActivity : SimpleActivity() {
             }
         }
     }
-    fun showFilterDialog() {
+    private fun showFilterDialog() {
         FilterContactSourcesDialog(this) {
             favorites_fragment?.refreshItems {
                 if (main_menu.isSearchOpen) {
