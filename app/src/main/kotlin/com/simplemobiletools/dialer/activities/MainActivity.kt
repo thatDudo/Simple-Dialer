@@ -115,8 +115,6 @@ class MainActivity : SimpleActivity() {
 
         view_pager.background.applyColorFilter(backgroundColor)
         main_tabs_holder.background.applyColorFilter(backgroundColor)
-//        view_pager.background.applyColorFilter(0x292C35)
-        // view_pager.setBackgroundColor(0x292C35)
 
         getAllFragments().forEach {
             it?.setupColors(getProperTextColor(), getProperPrimaryColor(), getProperPrimaryColor())
@@ -217,8 +215,14 @@ class MainActivity : SimpleActivity() {
     }
 
     private fun updateMenuColors() {
-        // updateStatusbarColor(getProperBackgroundColor())
-        main_menu.updateColors()
+        val backgroundColor = getProperBackgroundColor()
+        val contrastColor = backgroundColor.getContrastColor()
+
+        updateStatusbarColor(backgroundColor)
+//        main_menu.updateColors()
+        updateTopBarColors(top_toolbar, backgroundColor)
+        dialpad_title.setTextColor(contrastColor)
+        main_app_bar_layout.setCollapsedTitleTextColor(contrastColor)
     }
 
     private fun checkContactPermissions() {
