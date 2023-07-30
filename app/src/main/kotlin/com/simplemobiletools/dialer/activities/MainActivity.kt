@@ -137,22 +137,6 @@ class MainActivity : SimpleActivity() {
         Handler().postDelayed({
             recents_fragment?.refreshItems()
         }, 2000)
-
-        // Adjust bottom margin based on navigation bar height
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            val insets = windowManager.currentWindowMetrics.windowInsets
-            val statusBarHeight = insets.getInsets(WindowInsetsCompat.Type.statusBars()).top //in pixels
-            val navigationBarHeight = insets.getInsets(WindowInsetsCompat.Type.navigationBars()).bottom //in pixels
-
-            val lp = main_tabs_holder.layoutParams as MarginLayoutParams
-            lp.bottomMargin = Math.max(0, lp.bottomMargin - navigationBarHeight)
-            main_tabs_holder.requestLayout()
-        }
-
-        // Update actionbar height to 25% of screen height
-        val displayHeight = resources.displayMetrics.heightPixels
-        dialpad_title.layoutParams.height = displayHeight / 4
-        dialpad_title.requestLayout()
     }
 
     override fun onPause() {
@@ -472,6 +456,22 @@ class MainActivity : SimpleActivity() {
         if (isDestroyed || isFinishing) {
             return
         }
+
+        // Adjust bottom margin based on navigation bar height
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            val insets = windowManager.currentWindowMetrics.windowInsets
+            val statusBarHeight = insets.getInsets(WindowInsetsCompat.Type.statusBars()).top //in pixels
+            val navigationBarHeight = insets.getInsets(WindowInsetsCompat.Type.navigationBars()).bottom //in pixels
+
+            val lp = main_tabs_holder.layoutParams as MarginLayoutParams
+            lp.bottomMargin = Math.max(0, lp.bottomMargin - navigationBarHeight)
+            main_tabs_holder.requestLayout()
+        }
+
+        // Update actionbar height to 25% of screen height
+        val displayHeight = resources.displayMetrics.heightPixels
+        dialpad_title.layoutParams.height = Math.max(displayHeight / 4, 420)
+        dialpad_title.requestLayout()
 
         if (view_pager.adapter == null) {
             view_pager.adapter = ViewPagerAdapter(this)
