@@ -127,7 +127,8 @@ class MainActivity : SimpleActivity() {
             storedStartNameWithSurname = config.startNameWithSurname
         }
 
-        if (!main_menu.isSearchOpen) {
+        val searchItem = top_toolbar.menu.findItem(R.id.search)
+        if (!searchItem.isActionViewExpanded) {
             refreshItems(true)
         }
 
@@ -185,19 +186,19 @@ class MainActivity : SimpleActivity() {
     }
 
     private fun setupOptionsMenu() {
-        main_menu.getToolbar().inflateMenu(R.menu.menu)
-        main_menu.toggleHideOnScroll(false)
-        main_menu.setupMenu()
-
-        main_menu.onSearchClosedListener = {
-            getAllFragments().forEach {
-                it?.onSearchQueryChanged("")
-            }
-        }
-
-        main_menu.onSearchTextChangedListener = { text ->
-            getCurrentFragment()?.onSearchQueryChanged(text)
-        }
+//        main_menu.getToolbar().inflateMenu(R.menu.menu)
+//        main_menu.toggleHideOnScroll(false)
+//        main_menu.setupMenu()
+//
+//        main_menu.onSearchClosedListener = {
+//            getAllFragments().forEach {
+//                it?.onSearchQueryChanged("")
+//            }
+//        }
+//
+//        main_menu.onSearchTextChangedListener = { text ->
+//            getCurrentFragment()?.onSearchQueryChanged(text)
+//        }
 
         val searchItem = top_toolbar.menu.findItem(R.id.search)
         val searchView = searchItem.actionView as SearchView
@@ -468,7 +469,9 @@ class MainActivity : SimpleActivity() {
             },
             tabSelectedAction = {
                 val searchItem = top_toolbar.menu.findItem(R.id.search)
-                searchItem.collapseActionView()
+                if (searchItem.isActionViewExpanded) {
+                    searchItem.collapseActionView()
+                }
                 val title = getTabTitles()[it.position]
                 main_app_bar_layout.title = title
                 dialpad_title.text = title
@@ -634,37 +637,43 @@ class MainActivity : SimpleActivity() {
     }
 
     private fun showSortingDialog(showCustomSorting: Boolean) {
+        val searchItem = top_toolbar.menu.findItem(R.id.search)
+        val searchView = searchItem.actionView as SearchView
+
         ChangeSortingDialog(this, showCustomSorting) {
             favorites_fragment?.refreshItems {
-                if (main_menu.isSearchOpen) {
-                    getCurrentFragment()?.onSearchQueryChanged(main_menu.getCurrentQuery())
+                if (searchItem.isActionViewExpanded) {
+                    getCurrentFragment()?.onSearchQueryChanged(searchView.query.toString())
                 }
             }
 
             contacts_fragment?.refreshItems {
-                if (main_menu.isSearchOpen) {
-                    getCurrentFragment()?.onSearchQueryChanged(main_menu.getCurrentQuery())
+                if (searchItem.isActionViewExpanded) {
+                    getCurrentFragment()?.onSearchQueryChanged(searchView.query.toString())
                 }
             }
         }
     }
     private fun showFilterDialog() {
+        val searchItem = top_toolbar.menu.findItem(R.id.search)
+        val searchView = searchItem.actionView as SearchView
+
         FilterContactSourcesDialog(this) {
             favorites_fragment?.refreshItems {
-                if (main_menu.isSearchOpen) {
-                    getCurrentFragment()?.onSearchQueryChanged(main_menu.getCurrentQuery())
+                if (searchItem.isActionViewExpanded) {
+                    getCurrentFragment()?.onSearchQueryChanged(searchView.query.toString())
                 }
             }
 
             contacts_fragment?.refreshItems {
-                if (main_menu.isSearchOpen) {
-                    getCurrentFragment()?.onSearchQueryChanged(main_menu.getCurrentQuery())
+                if (searchItem.isActionViewExpanded) {
+                    getCurrentFragment()?.onSearchQueryChanged(searchView.query.toString())
                 }
             }
 
-            recents_fragment?.refreshItems{
-                if (main_menu.isSearchOpen) {
-                    getCurrentFragment()?.onSearchQueryChanged(main_menu.getCurrentQuery())
+            recents_fragment?.refreshItems {
+                if (searchItem.isActionViewExpanded) {
+                    getCurrentFragment()?.onSearchQueryChanged(searchView.query.toString())
                 }
             }
         }

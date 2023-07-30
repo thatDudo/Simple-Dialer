@@ -18,7 +18,6 @@ import com.simplemobiletools.dialer.helpers.MIN_RECENTS_THRESHOLD
 import com.simplemobiletools.dialer.helpers.RecentsHelper
 import com.simplemobiletools.dialer.interfaces.RefreshItemsListener
 import com.simplemobiletools.dialer.models.RecentCall
-import kotlinx.android.synthetic.main.activity_main.main_menu
 import kotlinx.android.synthetic.main.fragment_contacts.contacts_fragment
 import kotlinx.android.synthetic.main.fragment_recents.recents_fragment
 import kotlinx.android.synthetic.main.fragment_recents.view.recents_list

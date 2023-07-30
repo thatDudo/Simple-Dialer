@@ -17,7 +17,6 @@ import com.simplemobiletools.dialer.adapters.ContactsAdapter
 import com.simplemobiletools.dialer.extensions.config
 import com.simplemobiletools.dialer.extensions.launchCreateNewContactIntent
 import com.simplemobiletools.dialer.helpers.Config
-import kotlinx.android.synthetic.main.activity_main.main_menu
 import kotlinx.android.synthetic.main.fragment_letters_layout.view.*
 import kotlinx.android.synthetic.main.fragment_recents.view.*
 

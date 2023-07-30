@@ -9,7 +9,6 @@ import com.simplemobiletools.commons.activities.BaseSimpleActivity
 import com.simplemobiletools.commons.extensions.*
 import com.simplemobiletools.commons.helpers.LOWER_ALPHA
 import com.simplemobiletools.commons.helpers.MEDIUM_ALPHA
-import kotlinx.android.synthetic.main.activity_main.main_menu
 import kotlinx.android.synthetic.main.menu_search2.view.*
 
 class MySearchMenu2(context: Context, attrs: AttributeSet) : AppBarLayout(context, attrs) {
