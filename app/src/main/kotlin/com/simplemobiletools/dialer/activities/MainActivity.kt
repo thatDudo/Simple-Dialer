@@ -14,11 +14,10 @@ import android.os.Handler
 import android.provider.Settings
 import android.view.View
 import android.view.ViewGroup.MarginLayoutParams
-import android.view.WindowInsets
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.marginBottom
+import androidx.core.view.WindowInsetsCompat.toWindowInsetsCompat
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.snackbar.Snackbar
 import com.simplemobiletools.commons.dialogs.ConfirmationDialog
@@ -40,7 +39,6 @@ import com.simplemobiletools.dialer.helpers.OPEN_DIAL_PAD_AT_LAUNCH
 import com.simplemobiletools.dialer.helpers.RecentsHelper
 import com.simplemobiletools.dialer.helpers.tabsList
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_main.view.main_menu
 import kotlinx.android.synthetic.main.fragment_contacts.*
 import kotlinx.android.synthetic.main.fragment_favorites.*
 import kotlinx.android.synthetic.main.fragment_recents.*
@@ -197,7 +195,7 @@ class MainActivity : SimpleActivity() {
             getCurrentFragment()?.onSearchQueryChanged(text)
         }
 
-//        top_toolbar.menu.findItem(R.id.search)
+        top_toolbar.menu.findItem(R.id.search)
 
         top_toolbar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
@@ -384,6 +382,14 @@ class MainActivity : SimpleActivity() {
                 main_tabs_holder.getTabAt(wantedTab)?.select()
                 refreshMenuItems()
             }, 100L)
+        }
+
+        // Hide bottom view when keyboard is out
+        window.decorView.setOnApplyWindowInsetsListener { view, insets ->
+            val insetsCompat = toWindowInsetsCompat(insets, view)
+            val isImeVisible = insetsCompat.isVisible(WindowInsetsCompat.Type.ime())
+            main_tabs_holder.visibility = if (isImeVisible) View.GONE else View.VISIBLE
+            view.onApplyWindowInsets(insets)
         }
 
         main_dialpad_button.setOnClickListener {
