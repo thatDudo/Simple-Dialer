@@ -197,6 +197,8 @@ class MainActivity : SimpleActivity() {
             getCurrentFragment()?.onSearchQueryChanged(text)
         }
 
+//        top_toolbar.menu.findItem(R.id.search)
+
         top_toolbar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
 //                R.id.search -> main_menu
@@ -472,9 +474,14 @@ class MainActivity : SimpleActivity() {
         }
 
         // Update actionbar height to 25% of screen height
+        val displayWidth = resources.displayMetrics.widthPixels
         val displayHeight = resources.displayMetrics.heightPixels
-        dialpad_title.layoutParams.height = Math.max(displayHeight / 4, 420)
-        dialpad_title.requestLayout()
+        if (displayWidth < displayHeight) {
+            dialpad_title.layoutParams.height = Math.max(displayHeight / 4, 420)
+        }
+        else {
+            dialpad_title.layoutParams.height = Math.max(displayHeight / 3, 420)
+        }
 
         if (view_pager.adapter == null) {
             view_pager.adapter = ViewPagerAdapter(this)
