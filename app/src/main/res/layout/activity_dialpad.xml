@@ -133,7 +133,7 @@
             android:layout_height="@dimen/dialpad_button_size_small"
             android:layout_marginBottom="@dimen/activity_margin"
             android:background="@drawable/circle_background"
-            android:backgroundTint="#8000ac34"
+            android:backgroundTint="#00ac34"
             android:contentDescription="@string/call_number"
             android:elevation="@dimen/medium_margin"
             android:padding="@dimen/normal_margin"
