@@ -66,8 +66,8 @@
                         <TextView
                             android:id="@+id/dialpad_title"
                             android:layout_width="match_parent"
-                            android:layout_height="140dp"
-                            android:paddingTop="20dp"
+                            android:layout_height="220dp"
+                            android:paddingTop="45dp"
                             android:paddingBottom="60dp"
                             android:layout_gravity="center"
                             android:gravity="center"
