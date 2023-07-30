@@ -200,6 +200,19 @@ class MainActivity : SimpleActivity() {
 
         val searchItem = top_toolbar.menu.findItem(R.id.search)
         val searchView = searchItem.actionView as SearchView
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(text: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(text: String?): Boolean {
+                if (text != null) {
+                    getCurrentFragment()?.onSearchQueryChanged(text)
+                }
+                return false
+            }
+        })
+
         searchItem.setOnActionExpandListener(object : MenuItem.OnActionExpandListener {
             override fun onMenuItemActionExpand(p0: MenuItem): Boolean {
                 searchView.isIconifiedByDefault = false
@@ -211,6 +224,10 @@ class MainActivity : SimpleActivity() {
 
             override fun onMenuItemActionCollapse(p0: MenuItem): Boolean {
                 searchView.clearFocus()
+                getAllFragments().forEach {
+                    it?.onSearchQueryChanged("")
+                }
+                searchView.setQuery("", false)
                 return true
             }
         })
@@ -446,7 +463,6 @@ class MainActivity : SimpleActivity() {
                 it.customView?.findViewById<TextView>(R.id.tab_item_label)?.setTypeface(null, Typeface.NORMAL)
             },
             tabSelectedAction = {
-//                main_menu.closeSearch()
                 val searchItem = top_toolbar.menu.findItem(R.id.search)
                 searchItem.collapseActionView()
                 val title = getTabTitles()[it.position]
