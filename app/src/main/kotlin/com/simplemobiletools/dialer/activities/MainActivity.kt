@@ -12,8 +12,10 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.provider.Settings
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup.MarginLayoutParams
+import android.widget.SearchView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.WindowInsetsCompat
@@ -164,8 +166,9 @@ class MainActivity : SimpleActivity() {
     }
 
     override fun onBackPressed() {
-        if (main_menu.isSearchOpen) {
-            main_menu.closeSearch()
+        val searchItem = top_toolbar.menu.findItem(R.id.search)
+        if (searchItem.isActionViewExpanded) {
+            searchItem.collapseActionView()
         } else {
             super.onBackPressed()
         }
@@ -195,7 +198,22 @@ class MainActivity : SimpleActivity() {
             getCurrentFragment()?.onSearchQueryChanged(text)
         }
 
-        top_toolbar.menu.findItem(R.id.search)
+        val searchItem = top_toolbar.menu.findItem(R.id.search)
+        val searchView = searchItem.actionView as SearchView
+        searchItem.setOnActionExpandListener(object : MenuItem.OnActionExpandListener {
+            override fun onMenuItemActionExpand(p0: MenuItem): Boolean {
+                searchView.isIconifiedByDefault = false
+                searchView.isIconified = false
+                searchView.isFocusable = true
+                searchView.requestFocusFromTouch()
+                return true
+            }
+
+            override fun onMenuItemActionCollapse(p0: MenuItem): Boolean {
+                searchView.clearFocus()
+                return true
+            }
+        })
 
         top_toolbar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
@@ -429,6 +447,8 @@ class MainActivity : SimpleActivity() {
             },
             tabSelectedAction = {
 //                main_menu.closeSearch()
+                val searchItem = top_toolbar.menu.findItem(R.id.search)
+                searchItem.collapseActionView()
                 val title = getTabTitles()[it.position]
                 main_app_bar_layout.title = title
                 dialpad_title.text = title

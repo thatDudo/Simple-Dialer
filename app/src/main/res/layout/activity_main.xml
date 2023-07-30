@@ -133,7 +133,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <com.simplemobiletools.dialer.activities.MySearchMenu2
+        <com.simplemobiletools.commons.views.MySearchMenu
             android:id="@+id/main_menu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
