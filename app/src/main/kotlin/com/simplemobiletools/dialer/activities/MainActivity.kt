@@ -1,5 +1,6 @@
 package com.simplemobiletools.dialer.activities
 
+import android.animation.LayoutTransition
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
@@ -200,6 +201,9 @@ class MainActivity : SimpleActivity() {
 
         val searchItem = top_toolbar.menu.findItem(R.id.search)
         val searchView = searchItem.actionView as SearchView
+
+        top_toolbar.layoutTransition = LayoutTransition()
+
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(text: String?): Boolean {
                 return false
