@@ -54,7 +54,6 @@
                         app:layout_constraintVertical_weight="100"
                         android:background="@null"
                         app:collapsedTitleGravity="left"
-                        app:collapsedTitleTextAppearance="@style/ActionBar.MyTitleStyle"
                         app:expandedTitleGravity="center|top"
                         app:title="@string/call_history_tab"
                         app:titleEnabled="true"
