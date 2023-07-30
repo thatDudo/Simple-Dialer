@@ -65,16 +65,17 @@
                         <TextView
                             android:id="@+id/dialpad_title"
                             android:layout_width="match_parent"
-                            android:layout_height="140dp"
-                            android:paddingTop="20dp"
-                            android:paddingBottom="60dp"
+                            android:layout_height="160dp"
                             android:layout_gravity="center"
                             android:gravity="center"
-                            app:layout_collapseMode="pin"
+                            android:paddingTop="40dp"
+                            android:paddingBottom="60dp"
                             android:text="@string/call_history_tab"
                             android:textAlignment="center"
+                            android:textColor="?android:attr/textColorPrimaryNoDisable"
                             android:textSize="@dimen/dialpad_title_size"
-                            android:textStyle="bold"/>
+                            android:textStyle="bold"
+                            app:layout_collapseMode="pin" />
 
                         <com.google.android.material.appbar.MaterialToolbar
                             android:id="@+id/top_toolbar"
@@ -83,7 +84,9 @@
                             android:layout_gravity="bottom"
                             app:layout_collapseMode="pin"
                             app:layout_scrollFlags="scroll|enterAlwaysCollapsed"
+                            app:logoAdjustViewBounds="false"
                             app:menu="@menu/menu"
+                            app:navigationIconTint="#FFFFFF"
                             app:titleTextAppearance="@style/AppTheme.ActionBar.TitleTextStyle" />
                     </com.google.android.material.appbar.CollapsingToolbarLayout>
                 </com.google.android.material.appbar.AppBarLayout>
