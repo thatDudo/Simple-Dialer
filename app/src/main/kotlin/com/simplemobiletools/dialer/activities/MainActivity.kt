@@ -111,10 +111,9 @@ class MainActivity : SimpleActivity() {
         main_dialpad_button.setImageDrawable(dialpadIcon)
 
         updateTextColors(main_holder)
-//        setupTabColors()
+        setupTabColors()
 
         view_pager.background.applyColorFilter(backgroundColor)
-        main_tabs_holder.background.applyColorFilter(backgroundColor)
 
         getAllFragments().forEach {
             it?.setupColors(getProperTextColor(), getProperPrimaryColor(), getProperPrimaryColor())
@@ -278,19 +277,19 @@ class MainActivity : SimpleActivity() {
             .build()
     }
 
-//    private fun setupTabColors() {
-//        val activeView = main_tabs_holder.getTabAt(view_pager.currentItem)?.customView
-//        updateBottomTabItemColors(activeView, true, getSelectedTabDrawableIds()[view_pager.currentItem])
-//
-//        getInactiveTabIndexes(view_pager.currentItem).forEach { index ->
-//            val inactiveView = main_tabs_holder.getTabAt(index)?.customView
-//            updateBottomTabItemColors(inactiveView, false, getDeselectedTabDrawableIds()[index])
-//        }
-//
+    private fun setupTabColors() {
+        val activeView = main_tabs_holder.getTabAt(view_pager.currentItem)?.customView
+        updateBottomTabItemColors(activeView, true, getSelectedTabDrawableIds()[view_pager.currentItem])
+
+        getInactiveTabIndexes(view_pager.currentItem).forEach { index ->
+            val inactiveView = main_tabs_holder.getTabAt(index)?.customView
+            updateBottomTabItemColors(inactiveView, false, getDeselectedTabDrawableIds()[index])
+        }
+
 //        val bottomBarColor = getBottomNavigationBackgroundColor()
-//        main_tabs_holder.setBackgroundColor(bottomBarColor)
+        main_tabs_holder.background.applyColorFilter(getSecondaryBackgroundColor())
 //        updateNavigationBarColor(bottomBarColor)
-//    }
+    }
 
     private fun getInactiveTabIndexes(activeIndex: Int) = (0 until main_tabs_holder.tabCount).filter { it != activeIndex }
 
