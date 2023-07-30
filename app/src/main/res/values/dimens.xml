@@ -11,7 +11,7 @@
     <dimen name="call_status_text_size">20sp</dimen>
 
     <!-- keep these 2 values in dp to avoid scaling -->
-    <dimen name="dialpad_text_size">28dp</dimen>
+    <dimen name="dialpad_text_size">35dp</dimen>
     <dimen name="dialpad_letters_text_size">12dp</dimen>
 
     <dimen name="dialpad_title_size">40sp</dimen>
