@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/dialpad_coordinator"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/dialpad_toolbar"
@@ -21,9 +20,7 @@
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
         android:layout_marginTop="?attr/actionBarSize"
-        android:focusableInTouchMode="true"
-
-        >
+        android:focusableInTouchMode="true">
 
         <com.simplemobiletools.commons.views.MyTextView
             android:id="@+id/dialpad_placeholder"
@@ -50,8 +47,7 @@
             android:scrollbars="none"
             app:layoutManager="com.simplemobiletools.commons.views.MyLinearLayoutManager"
             app:layout_constraintBottom_toTopOf="@+id/dialpad_input"
-            app:layout_constraintTop_toTopOf="parent"
-            />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.reddit.indicatorfastscroll.FastScrollerView
             android:id="@+id/letter_fastscroller"
@@ -78,7 +74,6 @@
             android:layout_height="0.01dp"
             android:background="@drawable/divider"
 
-            android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@+id/dialpad_input" />
 
         <com.simplemobiletools.commons.views.MyEditText
@@ -90,7 +85,7 @@
             android:inputType="phone"
             android:layoutDirection="ltr"
             android:textCursorDrawable="@null"
-            android:textSize="30dp"
+            android:textSize="@dimen/dialpad_text_size"
             app:layout_constraintBottom_toTopOf="@+id/dialpad_wrapper"
             app:layout_constraintEnd_toStartOf="@+id/dialpad_clear_char"
             app:layout_constraintStart_toStartOf="parent" />
@@ -115,8 +110,7 @@
             layout="@layout/dialpad"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@+id/dialpad_call_button"
-            />
+            app:layout_constraintBottom_toTopOf="@+id/dialpad_call_button" />
 
         <ImageView
             android:id="@+id/dialpad_call_button"
@@ -149,8 +143,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/dialpad_call_button"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/dialpad_call_button"/>
-
+            app:layout_constraintTop_toTopOf="@+id/dialpad_call_button" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

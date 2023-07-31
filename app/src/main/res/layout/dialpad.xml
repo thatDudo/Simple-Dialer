@@ -22,7 +22,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/dialpad_2_holder"
         app:layout_constraintEnd_toStartOf="@+id/dialpad_2_holder"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/dialpad_2_holder">
+        app:layout_constraintTop_toTopOf="@+id/dialpad_2_holder"
+        android:background="@drawable/ripple_all_corners">
 
         <com.simplemobiletools.commons.views.MyTextView
             android:id="@+id/dialpad_1"
@@ -45,7 +46,8 @@
         android:contentDescription="@string/two"
         app:layout_constraintBottom_toTopOf="@+id/dialpad_5_holder"
         app:layout_constraintEnd_toStartOf="@+id/dialpad_3_holder"
-        app:layout_constraintStart_toEndOf="@+id/dialpad_1_holder">
+        app:layout_constraintStart_toEndOf="@+id/dialpad_1_holder"
+        android:background="@drawable/ripple_all_corners">
 
         <com.simplemobiletools.commons.views.MyTextView
             android:id="@+id/dialpad_2"
@@ -78,7 +80,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/dialpad_2_holder"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/dialpad_2_holder"
-        app:layout_constraintTop_toTopOf="@+id/dialpad_2_holder">
+        app:layout_constraintTop_toTopOf="@+id/dialpad_2_holder"
+        android:background="@drawable/ripple_all_corners">
 
         <com.simplemobiletools.commons.views.MyTextView
             android:id="@+id/dialpad_3"
@@ -109,7 +112,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/dialpad_5_holder"
         app:layout_constraintEnd_toStartOf="@+id/dialpad_5_holder"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/dialpad_5_holder">
+        app:layout_constraintTop_toTopOf="@+id/dialpad_5_holder"
+        android:background="@drawable/ripple_all_corners">
 
         <com.simplemobiletools.commons.views.MyTextView
             android:id="@+id/dialpad_4"
@@ -140,7 +144,8 @@
         android:contentDescription="@string/five"
         app:layout_constraintBottom_toTopOf="@+id/dialpad_8_holder"
         app:layout_constraintEnd_toStartOf="@+id/dialpad_6_holder"
-        app:layout_constraintStart_toEndOf="@+id/dialpad_4_holder">
+        app:layout_constraintStart_toEndOf="@+id/dialpad_4_holder"
+        android:background="@drawable/ripple_all_corners">
 
         <com.simplemobiletools.commons.views.MyTextView
             android:id="@+id/dialpad_5"
@@ -172,7 +177,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/dialpad_5_holder"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/dialpad_5_holder"
-        app:layout_constraintTop_toTopOf="@+id/dialpad_5_holder">
+        app:layout_constraintTop_toTopOf="@+id/dialpad_5_holder"
+        android:background="@drawable/ripple_all_corners">
 
         <com.simplemobiletools.commons.views.MyTextView
             android:id="@+id/dialpad_6"
@@ -203,7 +209,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/dialpad_8_holder"
         app:layout_constraintEnd_toStartOf="@+id/dialpad_8_holder"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/dialpad_8_holder">
+        app:layout_constraintTop_toTopOf="@+id/dialpad_8_holder"
+        android:background="@drawable/ripple_all_corners">
 
         <com.simplemobiletools.commons.views.MyTextView
             android:id="@+id/dialpad_7"
@@ -234,7 +241,8 @@
         android:contentDescription="@string/eight"
         app:layout_constraintBottom_toTopOf="@+id/dialpad_0_holder"
         app:layout_constraintEnd_toStartOf="@+id/dialpad_9_holder"
-        app:layout_constraintStart_toEndOf="@+id/dialpad_7_holder">
+        app:layout_constraintStart_toEndOf="@+id/dialpad_7_holder"
+        android:background="@drawable/ripple_all_corners">
 
         <com.simplemobiletools.commons.views.MyTextView
             android:id="@+id/dialpad_8"
@@ -266,7 +274,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/dialpad_8_holder"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/dialpad_8_holder"
-        app:layout_constraintTop_toTopOf="@+id/dialpad_8_holder">
+        app:layout_constraintTop_toTopOf="@+id/dialpad_8_holder"
+        android:background="@drawable/ripple_all_corners">
 
         <com.simplemobiletools.commons.views.MyTextView
             android:id="@+id/dialpad_9"
@@ -319,7 +328,8 @@
         android:contentDescription="@string/zero"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/dialpad_hashtag_holder"
-        app:layout_constraintStart_toEndOf="@+id/dialpad_asterisk_holder">
+        app:layout_constraintStart_toEndOf="@+id/dialpad_asterisk_holder"
+        android:background="@drawable/ripple_all_corners">
 
         <com.simplemobiletools.commons.views.MyTextView
             android:id="@+id/dialpad_0"
