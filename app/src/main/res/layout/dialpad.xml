@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:text="1"
-            android:textColor="@android:color/system_accent3_400"
+            android:textColor="@color/material_dynamic_primary60"
             android:textStyle="bold" />
 
     </RelativeLayout>
@@ -53,7 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="2"
-            android:textColor="@android:color/system_accent3_400"
+            android:textColor="@color/material_dynamic_primary60"
             android:textStyle="bold" />
 
         <com.simplemobiletools.commons.views.MyTextView
@@ -86,7 +86,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="3"
-            android:textColor="@android:color/system_accent3_400"
+            android:textColor="@color/material_dynamic_primary60"
             android:textStyle="bold" />
 
         <com.simplemobiletools.commons.views.MyTextView
@@ -117,7 +117,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="4"
-            android:textColor="@android:color/system_accent3_400"
+            android:textColor="@color/material_dynamic_primary60"
             android:textStyle="bold" />
 
         <com.simplemobiletools.commons.views.MyTextView
@@ -148,7 +148,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="5"
-            android:textColor="@android:color/system_accent3_400"
+            android:textColor="@color/material_dynamic_primary60"
             android:textStyle="bold" />
 
         <com.simplemobiletools.commons.views.MyTextView
@@ -180,7 +180,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="6"
-            android:textColor="@android:color/system_accent3_400"
+            android:textColor="@color/material_dynamic_primary60"
             android:textStyle="bold" />
 
         <com.simplemobiletools.commons.views.MyTextView
@@ -211,7 +211,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="7"
-            android:textColor="@android:color/system_accent3_400"
+            android:textColor="@color/material_dynamic_primary60"
             android:textStyle="bold" />
 
         <com.simplemobiletools.commons.views.MyTextView
@@ -242,7 +242,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="8"
-            android:textColor="@android:color/system_accent3_400"
+            android:textColor="@color/material_dynamic_primary60"
             android:textStyle="bold" />
 
         <com.simplemobiletools.commons.views.MyTextView
@@ -274,7 +274,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="9"
-            android:textColor="@android:color/system_accent3_400"
+            android:textColor="@color/material_dynamic_primary60"
             android:textStyle="bold" />
 
         <com.simplemobiletools.commons.views.MyTextView
@@ -327,7 +327,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0"
-            android:textColor="@android:color/system_accent3_400"
+            android:textColor="@color/material_dynamic_primary60"
             android:textStyle="bold" />
 
         <com.simplemobiletools.commons.views.MyTextView

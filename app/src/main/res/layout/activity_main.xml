@@ -78,6 +78,7 @@
                             android:id="@+id/top_toolbar"
                             android:layout_width="match_parent"
                             android:layout_height="64dp"
+                            android:layout_marginRight="6.5dp"
                             android:layout_gravity="bottom"
                             app:layout_collapseMode="pin"
                             app:layout_scrollFlags="scroll|enterAlwaysCollapsed"
