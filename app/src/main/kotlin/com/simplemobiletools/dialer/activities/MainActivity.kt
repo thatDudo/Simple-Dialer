@@ -424,11 +424,19 @@ class MainActivity : SimpleActivity() {
             }, 100L)
         }
 
-        // Hide bottom view when keyboard is out
         window.decorView.setOnApplyWindowInsetsListener { view, insets ->
             val insetsCompat = toWindowInsetsCompat(insets, view)
             val isImeVisible = insetsCompat.isVisible(WindowInsetsCompat.Type.ime())
+            // Hide bottom view when keyboard is out
             main_tabs_holder.visibility = if (isImeVisible) View.GONE else View.VISIBLE
+
+            // Also hide actionbar searchview if empty
+            val searchItem = top_toolbar.menu.findItem(R.id.search)
+            val searchView = searchItem.actionView as SearchView
+            if (!isImeVisible && searchItem.isActionViewExpanded && searchView.query.isEmpty()) {
+                searchItem.collapseActionView()
+            }
+
             view.onApplyWindowInsets(insets)
         }
 
