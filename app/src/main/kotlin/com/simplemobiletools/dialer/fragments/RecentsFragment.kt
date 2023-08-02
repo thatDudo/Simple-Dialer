@@ -28,6 +28,7 @@ import kotlinx.android.synthetic.main.fragment_recents.view.*
 class RecentsFragment(context: Context, attributeSet: AttributeSet) : MyViewPagerFragment(context, attributeSet), RefreshItemsListener {
     private var allRecentCalls = listOf<RecentCall>()
     private var recentsAdapter: RecentCallsAdapter? = null
+    private var currentSearchQuery: String = ""
 
     override fun setupFragment() {
         val placeholderResId = if (context.hasPermission(PERMISSION_READ_CALL_LOG)) {
@@ -73,6 +74,9 @@ class RecentsFragment(context: Context, attributeSet: AttributeSet) : MyViewPage
 
                 activity?.runOnUiThread {
                     gotRecents(allRecentCalls)
+                    if (currentSearchQuery.isNotEmpty()) {
+                        onSearchQueryChanged(currentSearchQuery)
+                    }
                 }
             }
         }
@@ -124,7 +128,7 @@ class RecentsFragment(context: Context, attributeSet: AttributeSet) : MyViewPage
     private fun getMoreRecentCalls() {
         val privateCursor = context?.getMyContactsCursor(false, true)
         val groupSubsequentCalls = context?.config?.groupSubsequentCalls ?: false
-        val querySize = allRecentCalls.size.plus(MIN_RECENTS_THRESHOLD)
+        val querySize = allRecentCalls.size + (if (currentSearchQuery.isEmpty()) MIN_RECENTS_THRESHOLD else 200)
         RecentsHelper(context).getRecentCalls(groupSubsequentCalls, querySize) { recents ->
             ContactsHelper(context).getContacts(showOnlyContactsWithNumbers = true) { contacts ->
                 val privateContacts = MyContactsContentProvider.getContacts(context, privateCursor)
@@ -135,6 +139,9 @@ class RecentsFragment(context: Context, attributeSet: AttributeSet) : MyViewPage
 
                 activity?.runOnUiThread {
                     gotRecents(allRecentCalls)
+                    if (currentSearchQuery.isNotEmpty()) {
+                        onSearchQueryChanged(currentSearchQuery)
+                    }
                 }
             }
         }
@@ -162,6 +169,7 @@ class RecentsFragment(context: Context, attributeSet: AttributeSet) : MyViewPage
     }
 
     override fun onSearchQueryChanged(text: String) {
+        currentSearchQuery = text
         val recentCalls = allRecentCalls.filter {
             it.name.contains(text, true) || it.doesContainPhoneNumber(text)
         }.sortedByDescending {
