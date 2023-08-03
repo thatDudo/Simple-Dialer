@@ -1,5 +1,6 @@
 package com.simplemobiletools.dialer.activities
 
+import android.animation.LayoutTransition
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
@@ -15,10 +16,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.provider.Settings
-import android.transition.Explode
-import android.transition.Slide
-import android.transition.Transition
-import android.transition.TransitionManager
+import android.transition.*
 import android.view.Gravity
 import android.view.MenuItem
 import android.view.View
@@ -276,21 +274,7 @@ class MainActivity : SimpleActivity() {
                 transition.addTarget(searchView)
                 TransitionManager.beginDelayedTransition(top_toolbar, transition)
 
-//                top_toolbar.onGlobalLayout {
-//                    val w = searchView.layoutParams.width
-//                    val valueAnimator = ValueAnimator.ofInt()
-//                    valueAnimator.interpolator = DecelerateInterpolator()
-//                    valueAnimator.addUpdateListener { animation ->
-//                        searchView.layoutParams.width = (w * (animation.animatedValue as Float)).toInt()
-////                        searchView.requestLayout()
-//                        top_toolbar.requestLayout()
-//                    }
-//                    valueAnimator.setFloatValues(0f, 1f)
-//                    valueAnimator.duration = 4000
-//                    valueAnimator.start()
-//                }
-
-
+                top_app_bar_layout.setExpanded(false)
                 return true
             }
 
@@ -306,9 +290,18 @@ class MainActivity : SimpleActivity() {
                 transition.addTarget(searchView)
                 transition.addListener(onStart = {
                     searchItem.isVisible = false
+                    main_app_bar_layout.isTitleEnabled = false
                 }, onEnd = {
                     searchItem.isVisible = true
+                    main_app_bar_layout.isTitleEnabled = true
+//                    TransitionManager.beginDelayedTransition(main_app_bar_layout, Fade())
                 })
+
+//                val set = TransitionSet().setOrdering(TransitionSet.ORDERING_SEQUENTIAL)
+//                set.addTransition(transition)
+//                set.addTransition(Fade())
+
+//                TransitionManager.beginDelayedTransition(top_app_bar_layout, set)
                 TransitionManager.beginDelayedTransition(top_toolbar, transition)
                 return true
             }
@@ -611,10 +604,10 @@ class MainActivity : SimpleActivity() {
         val displayWidth = resources.displayMetrics.widthPixels
         val displayHeight = resources.displayMetrics.heightPixels
         if (displayWidth < displayHeight) {
-            dialpad_title.layoutParams.height = Math.max(displayHeight / 4, 420)
+            dialpad_title.layoutParams.height = Math.max(displayHeight / 4, 440)
         }
         else {
-            dialpad_title.layoutParams.height = Math.max(displayHeight / 3, 420)
+            dialpad_title.layoutParams.height = Math.max(displayHeight / 3, 440)
         }
 
         if (view_pager.adapter == null) {
