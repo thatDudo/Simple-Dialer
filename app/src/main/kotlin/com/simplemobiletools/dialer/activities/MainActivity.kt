@@ -1,15 +1,14 @@
 package com.simplemobiletools.dialer.activities
 
-import android.animation.LayoutTransition
+import android.animation.Animator
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.ShortcutInfo
 import android.content.res.Configuration
-import android.content.res.Resources
 import android.graphics.Color
+import android.graphics.Rect
 import android.graphics.Typeface
-import android.graphics.drawable.Drawable
 import android.graphics.drawable.Icon
 import android.graphics.drawable.LayerDrawable
 import android.os.Build
@@ -17,21 +16,15 @@ import android.os.Bundle
 import android.os.Handler
 import android.provider.Settings
 import android.transition.*
-import android.view.Gravity
-import android.view.MenuItem
-import android.view.View
+import android.view.*
 import android.view.ViewGroup.MarginLayoutParams
-import android.view.animation.DecelerateInterpolator
+import android.view.animation.AccelerateInterpolator
 import android.widget.SearchView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.view.menu.ActionMenuItemView
-import androidx.appcompat.widget.ActionMenuView
-import androidx.core.content.ContextCompat
 import androidx.core.transition.addListener
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsCompat.toWindowInsetsCompat
-import androidx.dynamicanimation.animation.SpringAnimation
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.snackbar.Snackbar
 import com.simplemobiletools.commons.dialogs.ConfirmationDialog
@@ -56,6 +49,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_contacts.*
 import kotlinx.android.synthetic.main.fragment_favorites.*
 import kotlinx.android.synthetic.main.fragment_recents.*
+import kotlin.math.roundToInt
 
 
 class MainActivity : SimpleActivity() {
@@ -233,22 +227,6 @@ class MainActivity : SimpleActivity() {
 //        }
         searchView.findViewById<View>(resources.getIdentifier("android:id/search_plate", null, null))?.setBackgroundColor(Color.TRANSPARENT)
 
-//        top_toolbar.layoutTransition = LayoutTransition()
-//        top_toolbar.layoutTransition.setStartDelay(LayoutTransition.APPEARING, 0)
-//        top_toolbar.layoutTransition.setStartDelay(LayoutTransition.DISAPPEARING, 0)
-//        top_toolbar.layoutTransition.addTransitionListener(object : LayoutTransition.TransitionListener {
-//            override fun startTransition(p0: LayoutTransition?, p1: ViewGroup?, p2: View?, p3: Int) {
-//                if (p2 is AppCompatButton) {
-//                    p2.isInvisible = true
-//                }
-//            }
-//
-//            override fun endTransition(p0: LayoutTransition?, p1: ViewGroup?, p2: View?, p3: Int) {
-//                val i = searchItem == p2
-//            }
-//
-//        })
-
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(text: String?): Boolean {
                 return false
@@ -269,14 +247,65 @@ class MainActivity : SimpleActivity() {
                 searchView.isFocusable = true
                 searchView.requestFocusFromTouch()
 
-//                val transition = Slide(Gravity.RIGHT)
+//                val transition = Slide(Gravity.END)
                 val transition = Explode()
                 transition.addTarget(searchView)
+                transition.epicenterCallback = object : Transition.EpicenterCallback() {
+                    override fun onGetEpicenter(transition: Transition?): Rect {
+                        val pos = IntArray(2)
+                        top_toolbar.getLocationOnScreen(pos)
+                        pos[0] += searchView.left
+                        pos[1] += searchView.top
+                        return Rect(pos[0], pos[1], pos[0] + searchView.width - 10, pos[1] + searchView.height)
+                    }
+                }
                 TransitionManager.beginDelayedTransition(top_toolbar, transition)
+
+//                top_toolbar.viewTreeObserver.addOnPreDrawListener(object : ViewTreeObserver.OnPreDrawListener {
+//                    override fun onPreDraw(): Boolean {
+//                        if (v == searchView) {
+//                            val fromX = searchView.translationX
+//                            val fromY = searchView.translationY
+//                            val toX = top_toolbar.translationX
+//                            val toY = top_toolbar.translationY
+////                            val anim = TranslateAnimation()
+//                        }
+//                        return true
+//                    }
+//                })
+//
+//                top_toolbar.addOnAttachStateChangeListener(object : View.OnAttachStateChangeListener {
+//                    override fun onViewAttachedToWindow(v: View) {
+//                        if (v == searchView) {
+//                            val fromX = searchView.translationX
+//                            val fromY = searchView.translationY
+//                            val toX = top_toolbar.translationX
+//                            val toY = top_toolbar.translationY
+////                            val anim = TranslateAnimation()
+//                        }
+//                    }
+//
+//                    override fun onViewDetachedFromWindow(v: View) {
+//
+//                    }
+//                })
 
                 top_app_bar_layout.setExpanded(false)
                 return true
             }
+
+//            inner class SearchViewSlideTransition : Slide(Gravity.END) {
+//                fun <T : Any> T.setAndReturnPrivateProperty(variableName: String, data: Any): Any? {
+//                    return javaClass.getDeclaredField(variableName).let { field ->
+//                        field.isAccessible = true
+//                        field.set(this, data)
+//                        return@let field.get(this)
+//                    }
+//                }
+//                init {
+//                    setAndReturnPrivateProperty("")
+//                }
+//            }
 
             override fun onMenuItemActionCollapse(p0: MenuItem): Boolean {
                 searchView.clearFocus()
@@ -285,9 +314,19 @@ class MainActivity : SimpleActivity() {
                 }
                 searchView.setQuery("", false)
 
+//                val transition = SearchViewSlideTransition()
 //                val transition = Slide(Gravity.END)
                 val transition = Explode()
                 transition.addTarget(searchView)
+                transition.epicenterCallback = object : Transition.EpicenterCallback() {
+                    override fun onGetEpicenter(transition: Transition?): Rect {
+                        val pos = IntArray(2)
+                        top_toolbar.getLocationOnScreen(pos)
+                        pos[0] += searchView.left
+                        pos[1] += searchView.top
+                        return Rect(pos[0], pos[1], pos[0] + searchView.width - 10, pos[1] + searchView.height)
+                    }
+                }
                 transition.addListener(onStart = {
                     searchItem.isVisible = false
                     main_app_bar_layout.isTitleEnabled = false
