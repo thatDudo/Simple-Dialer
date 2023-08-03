@@ -256,7 +256,7 @@ class MainActivity : SimpleActivity() {
                         top_toolbar.getLocationOnScreen(pos)
                         pos[0] += searchView.left
                         pos[1] += searchView.top
-                        return Rect(pos[0], pos[1], pos[0] + searchView.width - 10, pos[1] + searchView.height)
+                        return Rect(pos[0], pos[1], pos[0] + searchView.width - 2, pos[1] + searchView.height)
                     }
                 }
                 TransitionManager.beginDelayedTransition(top_toolbar, transition)
@@ -324,7 +324,7 @@ class MainActivity : SimpleActivity() {
                         top_toolbar.getLocationOnScreen(pos)
                         pos[0] += searchView.left
                         pos[1] += searchView.top
-                        return Rect(pos[0], pos[1], pos[0] + searchView.width - 10, pos[1] + searchView.height)
+                        return Rect(pos[0], pos[1], pos[0] + searchView.width - 2, pos[1] + searchView.height)
                     }
                 }
                 transition.addListener(onStart = {
