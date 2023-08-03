@@ -1,26 +1,39 @@
 package com.simplemobiletools.dialer.activities
 
-import android.animation.LayoutTransition
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.ShortcutInfo
 import android.content.res.Configuration
+import android.content.res.Resources
+import android.graphics.Color
 import android.graphics.Typeface
+import android.graphics.drawable.Drawable
 import android.graphics.drawable.Icon
 import android.graphics.drawable.LayerDrawable
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.provider.Settings
+import android.transition.Explode
+import android.transition.Slide
+import android.transition.Transition
+import android.transition.TransitionManager
+import android.view.Gravity
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup.MarginLayoutParams
+import android.view.animation.DecelerateInterpolator
 import android.widget.SearchView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.view.menu.ActionMenuItemView
+import androidx.appcompat.widget.ActionMenuView
+import androidx.core.content.ContextCompat
+import androidx.core.transition.addListener
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsCompat.toWindowInsetsCompat
+import androidx.dynamicanimation.animation.SpringAnimation
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.snackbar.Snackbar
 import com.simplemobiletools.commons.dialogs.ConfirmationDialog
@@ -203,7 +216,40 @@ class MainActivity : SimpleActivity() {
         val searchItem = top_toolbar.menu.findItem(R.id.search)
         val searchView = searchItem.actionView as SearchView
 
-        top_toolbar.layoutTransition = LayoutTransition()
+        searchView.isSubmitButtonEnabled = false
+
+        top_toolbar.menu.getItem(1)
+
+//        for (i in 0..top_toolbar.childCount) {
+//            val view = top_toolbar.getChildAt(i)
+//            if (view is ActionMenuView) {
+//                for (j in 0..view.childCount) {
+//                    val view2 = view.getChildAt(j)
+//                    if (view2 != null) {
+//                        view2.background = ContextCompat.getDrawable(this, R.drawable.tile_background)
+//                        view2.background.applyColorFilter(0xFFFF00)
+//                        view2.background.alpha = 255
+//                    }
+//                }
+//            }
+//        }
+        searchView.findViewById<View>(resources.getIdentifier("android:id/search_plate", null, null))?.setBackgroundColor(Color.TRANSPARENT)
+
+//        top_toolbar.layoutTransition = LayoutTransition()
+//        top_toolbar.layoutTransition.setStartDelay(LayoutTransition.APPEARING, 0)
+//        top_toolbar.layoutTransition.setStartDelay(LayoutTransition.DISAPPEARING, 0)
+//        top_toolbar.layoutTransition.addTransitionListener(object : LayoutTransition.TransitionListener {
+//            override fun startTransition(p0: LayoutTransition?, p1: ViewGroup?, p2: View?, p3: Int) {
+//                if (p2 is AppCompatButton) {
+//                    p2.isInvisible = true
+//                }
+//            }
+//
+//            override fun endTransition(p0: LayoutTransition?, p1: ViewGroup?, p2: View?, p3: Int) {
+//                val i = searchItem == p2
+//            }
+//
+//        })
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(text: String?): Boolean {
@@ -224,6 +270,27 @@ class MainActivity : SimpleActivity() {
                 searchView.isIconified = false
                 searchView.isFocusable = true
                 searchView.requestFocusFromTouch()
+
+//                val transition = Slide(Gravity.RIGHT)
+                val transition = Explode()
+                transition.addTarget(searchView)
+                TransitionManager.beginDelayedTransition(top_toolbar, transition)
+
+//                top_toolbar.onGlobalLayout {
+//                    val w = searchView.layoutParams.width
+//                    val valueAnimator = ValueAnimator.ofInt()
+//                    valueAnimator.interpolator = DecelerateInterpolator()
+//                    valueAnimator.addUpdateListener { animation ->
+//                        searchView.layoutParams.width = (w * (animation.animatedValue as Float)).toInt()
+////                        searchView.requestLayout()
+//                        top_toolbar.requestLayout()
+//                    }
+//                    valueAnimator.setFloatValues(0f, 1f)
+//                    valueAnimator.duration = 4000
+//                    valueAnimator.start()
+//                }
+
+
                 return true
             }
 
@@ -233,6 +300,16 @@ class MainActivity : SimpleActivity() {
                     it?.onSearchQueryChanged("")
                 }
                 searchView.setQuery("", false)
+
+//                val transition = Slide(Gravity.END)
+                val transition = Explode()
+                transition.addTarget(searchView)
+                transition.addListener(onStart = {
+                    searchItem.isVisible = false
+                }, onEnd = {
+                    searchItem.isVisible = true
+                })
+                TransitionManager.beginDelayedTransition(top_toolbar, transition)
                 return true
             }
         })
@@ -431,11 +508,11 @@ class MainActivity : SimpleActivity() {
             main_tabs_holder.visibility = if (isImeVisible) View.GONE else View.VISIBLE
 
             // Also hide actionbar searchview if empty
-            val searchItem = top_toolbar.menu.findItem(R.id.search)
-            val searchView = searchItem.actionView as SearchView
-            if (!isImeVisible && searchItem.isActionViewExpanded && searchView.query.isEmpty()) {
-                searchItem.collapseActionView()
-            }
+//            val searchItem = top_toolbar.menu.findItem(R.id.search)
+//            val searchView = searchItem.actionView as SearchView
+//            if (!isImeVisible && searchItem.isActionViewExpanded && searchView.query.isEmpty()) {
+//                searchItem.collapseActionView()
+//            }
 
             view.onApplyWindowInsets(insets)
         }
