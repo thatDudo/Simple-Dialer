@@ -10,7 +10,7 @@
         android:id="@+id/dialpad_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/color_primary"
+        android:background="@null"
         app:menu="@menu/menu_dialpad"
         app:title="@string/dialpad"
         app:titleTextAppearance="@style/AppTheme.ActionBar.TitleTextStyle" />
@@ -49,7 +49,12 @@
             android:scrollbars="none"
             app:layoutManager="com.simplemobiletools.commons.views.MyLinearLayoutManager"
             app:layout_constraintBottom_toTopOf="@+id/dialpad_input"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@drawable/tile_background"
+            android:isScrollContainer="true"
+            android:clipToOutline="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:layout_marginHorizontal="15dp" />
 
         <com.reddit.indicatorfastscroll.FastScrollerView
             android:id="@+id/letter_fastscroller"
