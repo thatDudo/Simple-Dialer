@@ -18,14 +18,14 @@
         android:id="@+id/settings_nested_scrollview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="15dp"
         android:layout_marginTop="?attr/actionBarSize"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/tile_background"
+        android:clipToOutline="true"
         android:fillViewport="true"
         android:scrollbars="vertical"
-        android:background="@drawable/tile_background"
-        android:backgroundTint="@color/background"
-        android:layout_marginHorizontal="15dp"
-        android:layout_marginBottom="15dp"
-        android:clipToOutline="true">
+        android:backgroundTint="@color/cardview_dark_background">
 
         <LinearLayout
             android:id="@+id/settings_holder"
@@ -68,20 +68,24 @@
                 style="@style/SettingsSectionLabelStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/general_settings" />
+                android:fontFamily="@font/product_sans_bold"
+                android:text="@string/general_settings"
+                tools:textStyle="bold" />
 
             <RelativeLayout
                 android:id="@+id/settings_purchase_thank_you_holder"
                 style="@style/SettingsHolderTextViewOneLinerStyle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:visibility="gone">
 
                 <com.simplemobiletools.commons.views.MyTextView
                     android:id="@+id/settings_purchase_thank_you_label"
                     style="@style/SettingsTextLabelStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/purchase_simple_thank_you" />
+                    android:text="@string/purchase_simple_thank_you"
+                    android:visibility="gone" />
 
             </RelativeLayout>
 
@@ -260,7 +264,9 @@
                 style="@style/SettingsSectionLabelStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/startup" />
+                android:fontFamily="@font/product_sans_bold"
+                android:text="@string/startup"
+                tools:textStyle="bold" />
 
             <RelativeLayout
                 android:id="@+id/settings_manage_tabs_holder"
@@ -324,7 +330,9 @@
                 style="@style/SettingsSectionLabelStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/calls" />
+                android:fontFamily="@font/product_sans_bold"
+                android:text="@string/calls"
+                tools:textStyle="bold" />
 
             <RelativeLayout
                 android:id="@+id/settings_group_subsequent_calls_holder"
@@ -410,7 +418,9 @@
                 style="@style/SettingsSectionLabelStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/migrating" />
+                android:fontFamily="@font/product_sans_bold"
+                android:text="@string/migrating"
+                tools:textStyle="bold" />
 
             <RelativeLayout
                 android:id="@+id/settings_export_calls_holder"
