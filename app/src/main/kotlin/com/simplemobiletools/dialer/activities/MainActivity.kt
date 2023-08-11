@@ -1,9 +1,11 @@
 package com.simplemobiletools.dialer.activities
 
+import android.Manifest
 import android.animation.Animator
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.content.pm.ShortcutInfo
 import android.content.res.Configuration
 import android.graphics.Color
@@ -22,6 +24,9 @@ import android.view.animation.AccelerateInterpolator
 import android.widget.SearchView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.transition.addListener
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsCompat.toWindowInsetsCompat
@@ -33,6 +38,7 @@ import com.simplemobiletools.commons.extensions.*
 import com.simplemobiletools.commons.helpers.*
 import com.simplemobiletools.commons.models.FAQItem
 import com.simplemobiletools.commons.models.contacts.Contact
+import com.simplemobiletools.dialer.App
 import com.simplemobiletools.dialer.BuildConfig
 import com.simplemobiletools.dialer.R
 import com.simplemobiletools.dialer.adapters.ViewPagerAdapter
@@ -53,11 +59,16 @@ import kotlin.math.roundToInt
 
 
 class MainActivity : SimpleActivity() {
+    companion object {
+        private const val STORAGE_PERMISSION_CODE = 123
+    }
+
     private var launchedDialer = false
     private var storedShowTabs = 0
     private var storedStartNameWithSurname = false
     var cachedContacts = ArrayList<Contact>()
 
+    @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
         isMaterialActivity = true
         super.onCreate(savedInstanceState)
@@ -100,7 +111,26 @@ class MainActivity : SimpleActivity() {
 
         setupTabs()
         Contact.sorting = config.sorting
+
+        // Check if the permission is already granted
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.MANAGE_EXTERNAL_STORAGE)
+            != PackageManager.PERMISSION_GRANTED) {
+
+            // Request permission
+            ActivityCompat.requestPermissions(
+                this,
+                permissionRequests,
+                STORAGE_PERMISSION_CODE
+            )
+        }
     }
+
+    @RequiresApi(Build.VERSION_CODES.R)
+    val permissionRequests = arrayOf(
+        Manifest.permission.READ_EXTERNAL_STORAGE,
+        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        Manifest.permission.MANAGE_EXTERNAL_STORAGE
+    )
 
     override fun onResume() {
         super.onResume()

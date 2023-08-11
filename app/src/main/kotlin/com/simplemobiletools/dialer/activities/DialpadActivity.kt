@@ -3,6 +3,7 @@ package com.simplemobiletools.dialer.activities
 import android.annotation.SuppressLint
 import android.annotation.TargetApi
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.database.Cursor
 import android.net.Uri
 import android.os.Build
@@ -12,18 +13,24 @@ import android.os.Looper
 import android.provider.Telephony.Sms.Intents.SECRET_CODE_ACTION
 import android.telephony.PhoneNumberUtils
 import android.telephony.TelephonyManager
+import android.util.LayoutDirection
 import android.util.TypedValue
 import android.view.KeyEvent
 import android.view.MotionEvent
+import android.view.OrientationEventListener
 import android.view.View
 import android.view.ViewConfiguration
+import androidx.appcompat.widget.LinearLayoutCompat.OrientationMode
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
+import androidx.core.view.marginLeft
+import androidx.core.view.marginRight
 import com.reddit.indicatorfastscroll.FastScrollItemIndicator
 import com.simplemobiletools.commons.dialogs.CallConfirmationDialog
 import com.simplemobiletools.commons.extensions.*
 import com.simplemobiletools.commons.helpers.*
 import com.simplemobiletools.commons.models.contacts.Contact
+import com.simplemobiletools.dialer.App
 import com.simplemobiletools.dialer.R
 import com.simplemobiletools.dialer.adapters.ContactsAdapter
 import com.simplemobiletools.dialer.extensions.*
@@ -49,6 +56,7 @@ class DialpadActivity : SimpleActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         setContentView(R.layout.activity_dialpad)
         hasRussianLocale = Locale.getDefault().language == "ru"
 
@@ -168,6 +176,14 @@ class DialpadActivity : SimpleActivity() {
         letter_fastscroller_thumb.setupWithFastScroller(letter_fastscroller)
         letter_fastscroller_thumb.textColor = properPrimaryColor.getContrastColor()
         letter_fastscroller_thumb.thumbColor = properPrimaryColor.getColorStateList()
+
+        val displayWidth = resources.displayMetrics.widthPixels
+        dialpad_holder.layoutMode = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+        dialpad_holder.layoutParams.width = displayWidth / 2 - dialpad_holder.marginLeft
+        dialpad_holder.requestLayout()
+        numpad_holder.layoutMode = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+        numpad_holder.layoutParams.width = displayWidth / 2 - numpad_holder.marginLeft
+        numpad_holder.requestLayout()
     }
 
     override fun onResume() {
@@ -316,7 +332,7 @@ class DialpadActivity : SimpleActivity() {
                     CallConfirmationDialog(this, number) {
                         callContactWithSim(number, handleIndex == 0)
                     }
-                }else{
+                } else {
                     callContactWithSim(number, handleIndex == 0)
                 }
             } else {
@@ -324,7 +340,7 @@ class DialpadActivity : SimpleActivity() {
                     CallConfirmationDialog(this, number) {
                         startCallIntent(number)
                     }
-                }else{
+                } else {
                     startCallIntent(number)
                 }
             }
@@ -406,12 +422,14 @@ class DialpadActivity : SimpleActivity() {
                         }, longPressTimeout)
                     }
                 }
+
                 MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
                     stopDialpadTone(char)
                     if (longClickable) {
                         longPressHandler.removeCallbacksAndMessages(null)
                     }
                 }
+
                 MotionEvent.ACTION_MOVE -> {
                     val viewContainsTouchEvent = if (event.rawX.isNaN() || event.rawY.isNaN()) {
                         false
