@@ -61,7 +61,8 @@
 
             <include
                 android:id="@+id/settings_color_customization_divider"
-                layout="@layout/divider" />
+                layout="@layout/divider"
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/settings_general_settings_label"
