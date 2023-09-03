@@ -41,24 +41,6 @@
                 android:text="@string/color_customization"
                 android:visibility="gone" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/settings_color_customization_holder"
-                style="@style/SettingsHolderTextViewOneLinerStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone">
-
-                <com.simplemobiletools.commons.views.MyTextView
-                    android:id="@+id/settings_color_customization_label"
-                    style="@style/SettingsTextLabelStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/customize_colors"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
             <include
                 android:id="@+id/settings_color_customization_divider"
                 layout="@layout/divider"
@@ -72,6 +54,24 @@
                 android:fontFamily="@font/product_sans_bold"
                 android:text="@string/general_settings"
                 tools:textStyle="bold" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/settings_color_customization_holder"
+                style="@style/SettingsHolderTextViewOneLinerStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible">
+
+                <com.simplemobiletools.commons.views.MyTextView
+                    android:id="@+id/settings_color_customization_label"
+                    style="@style/SettingsTextLabelStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/customize_colors"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <RelativeLayout
                 android:id="@+id/settings_purchase_thank_you_holder"
