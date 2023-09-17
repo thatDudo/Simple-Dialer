@@ -6,7 +6,9 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.Menu
+import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.view.WindowInsetsCompat
 import com.simplemobiletools.commons.activities.ManageBlockedNumbersActivity
 import com.simplemobiletools.commons.dialogs.ChangeDateTimeFormatDialog
 import com.simplemobiletools.commons.dialogs.FeatureLockedDialog
@@ -21,6 +23,7 @@ import com.simplemobiletools.dialer.extensions.config
 import com.simplemobiletools.dialer.helpers.RecentsHelper
 import com.simplemobiletools.dialer.models.RecentCall
 import kotlinx.android.synthetic.main.activity_main.dialpad_title
+import kotlinx.android.synthetic.main.activity_main.main_tabs_holder
 import kotlinx.android.synthetic.main.activity_settings.*
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.decodeFromString
@@ -69,6 +72,17 @@ class SettingsActivity : SimpleActivity() {
         top_toolbar.setNavigationOnClickListener {
             hideKeyboard()
             finish()
+        }
+
+        // Adjust bottom margin based on navigation bar height
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            val insets = windowManager.currentWindowMetrics.windowInsets
+            val statusBarHeight = insets.getInsets(WindowInsetsCompat.Type.statusBars()).top //in pixels
+            val navigationBarHeight = insets.getInsets(WindowInsetsCompat.Type.navigationBars()).bottom //in pixels
+
+            val lp = settings_layout_holder.layoutParams as ViewGroup.MarginLayoutParams
+            lp.bottomMargin = Math.max(0, lp.bottomMargin - navigationBarHeight)
+            settings_layout_holder.requestLayout()
         }
 
         // Update actionbar height to 25% of screen height
