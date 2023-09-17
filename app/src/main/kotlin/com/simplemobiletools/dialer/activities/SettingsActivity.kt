@@ -61,6 +61,12 @@ class SettingsActivity : SimpleActivity() {
     override fun onResume() {
         super.onResume()
 //        setupToolbar(settings_toolbar, NavigationIcon.Arrow)
+        top_toolbar.navigationIcon = resources.getColoredDrawableWithColor(R.drawable.ic_arrow_left_vector, getProperBackgroundColor().getContrastColor())
+        top_toolbar.setNavigationOnClickListener {
+            hideKeyboard()
+            finish()
+        }
+
 
         setupPurchaseThankYou()
         setupCustomizeColors()
