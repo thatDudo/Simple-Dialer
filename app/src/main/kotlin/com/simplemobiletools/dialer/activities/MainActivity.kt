@@ -567,7 +567,9 @@ class MainActivity : SimpleActivity() {
             val insetsCompat = toWindowInsetsCompat(insets, view)
             val isImeVisible = insetsCompat.isVisible(WindowInsetsCompat.Type.ime())
             // Hide bottom view when keyboard is out
-            main_tabs_holder.visibility = if (isImeVisible) View.GONE else View.VISIBLE
+            val v = if (isImeVisible) View.GONE else View.VISIBLE
+            main_tabs_holder.visibility = v
+            main_dialpad_button.visibility = v
 
             // Also hide actionbar searchview if empty
 //            val searchItem = top_toolbar.menu.findItem(R.id.search)
