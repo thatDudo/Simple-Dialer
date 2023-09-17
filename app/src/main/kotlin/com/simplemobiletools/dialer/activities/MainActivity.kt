@@ -20,7 +20,6 @@ import android.provider.Settings
 import android.transition.*
 import android.view.*
 import android.view.ViewGroup.MarginLayoutParams
-import android.view.animation.AccelerateInterpolator
 import android.widget.SearchView
 import android.widget.TextView
 import android.widget.Toast
@@ -67,6 +66,8 @@ class MainActivity : SimpleActivity() {
     private var storedShowTabs = 0
     private var storedStartNameWithSurname = false
     var cachedContacts = ArrayList<Contact>()
+
+    var defaultTitlePadding = -1
 
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -672,14 +673,23 @@ class MainActivity : SimpleActivity() {
         }
 
         // Update actionbar height to 25% of screen height
+        if (defaultTitlePadding < 0) {
+            defaultTitlePadding = dialpad_title.paddingTop
+        }
         val displayWidth = resources.displayMetrics.widthPixels
         val displayHeight = resources.displayMetrics.heightPixels
-        if (displayWidth < displayHeight) {
-            dialpad_title.layoutParams.height = Math.max(displayHeight / 4, 440)
+        var height = if (displayWidth < displayHeight) {
+            Math.max(displayHeight * 0.25f, 440f)
+        } else {
+            Math.max(displayHeight * 0.33f, 260f)
         }
-        else {
-            dialpad_title.layoutParams.height = Math.max(displayHeight / 3, 440)
+        if (height < 440f) {
+            val newPadding = Math.max(defaultTitlePadding - (440f - height), 0f)
+            dialpad_title.setPadding(dialpad_title.paddingLeft, newPadding.roundToInt(), dialpad_title.paddingRight, dialpad_title.paddingBottom)
         }
+        dialpad_title.layoutParams.height = height.roundToInt()
+//        val newFontSize = Math.min(Math.max(height - dialpad_title.paddingTop - dialpad_title.paddingBottom, 50f), defaultTitleFontSize)
+//        dialpad_title.setTextSize(TypedValue.COMPLEX_UNIT_PX, newFontSize)
 
         if (view_pager.adapter == null) {
             view_pager.adapter = ViewPagerAdapter(this)
