@@ -683,11 +683,12 @@ class MainActivity : SimpleActivity() {
         } else {
             Math.max(displayHeight * 0.33f, 260f)
         }
+        dialpad_title.layoutParams.height = height.roundToInt()
+        // Make sure that text wont get cut off
         if (height < 440f) {
             val newPadding = Math.max(defaultTitlePadding - (440f - height), 0f)
             dialpad_title.setPadding(dialpad_title.paddingLeft, newPadding.roundToInt(), dialpad_title.paddingRight, dialpad_title.paddingBottom)
         }
-        dialpad_title.layoutParams.height = height.roundToInt()
 //        val newFontSize = Math.min(Math.max(height - dialpad_title.paddingTop - dialpad_title.paddingBottom, 50f), defaultTitleFontSize)
 //        dialpad_title.setTextSize(TypedValue.COMPLEX_UNIT_PX, newFontSize)
 

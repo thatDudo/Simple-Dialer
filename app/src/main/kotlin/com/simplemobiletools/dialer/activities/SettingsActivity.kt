@@ -20,17 +20,21 @@ import com.simplemobiletools.dialer.dialogs.ManageVisibleTabsDialog
 import com.simplemobiletools.dialer.extensions.config
 import com.simplemobiletools.dialer.helpers.RecentsHelper
 import com.simplemobiletools.dialer.models.RecentCall
+import kotlinx.android.synthetic.main.activity_main.dialpad_title
 import kotlinx.android.synthetic.main.activity_settings.*
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import java.util.*
+import kotlin.math.roundToInt
 import kotlin.system.exitProcess
 
 class SettingsActivity : SimpleActivity() {
 
     private val callHistoryFileType = "application/json"
+
+    var defaultTitlePadding = -1
 
     private val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
         if (uri != null) {
@@ -66,6 +70,26 @@ class SettingsActivity : SimpleActivity() {
             hideKeyboard()
             finish()
         }
+
+        // Update actionbar height to 25% of screen height
+        if (defaultTitlePadding < 0) {
+            defaultTitlePadding = dialpad_title.paddingTop
+        }
+        val displayWidth = resources.displayMetrics.widthPixels
+        val displayHeight = resources.displayMetrics.heightPixels
+        var height = if (displayWidth < displayHeight) {
+            Math.max(displayHeight * 0.25f, 440f)
+        } else {
+            Math.max(displayHeight * 0.33f, 260f)
+        }
+        dialpad_title.layoutParams.height = height.roundToInt()
+        // Make sure that text wont get cut off
+        if (height < 440f) {
+            val newPadding = Math.max(defaultTitlePadding - (440f - height), 0f)
+            dialpad_title.setPadding(dialpad_title.paddingLeft, newPadding.roundToInt(), dialpad_title.paddingRight, dialpad_title.paddingBottom)
+        }
+//        val newFontSize = Math.min(Math.max(height - dialpad_title.paddingTop - dialpad_title.paddingBottom, 50f), defaultTitleFontSize)
+//        dialpad_title.setTextSize(TypedValue.COMPLEX_UNIT_PX, newFontSize)
 
 
         setupPurchaseThankYou()
