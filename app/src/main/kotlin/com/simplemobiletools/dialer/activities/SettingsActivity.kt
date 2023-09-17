@@ -54,12 +54,13 @@ class SettingsActivity : SimpleActivity() {
         setContentView(R.layout.activity_settings)
 
         updateMaterialActivityViews(settings_coordinator, settings_holder, useTransparentNavigation = true, useTopSearchMenu = false)
-        setupMaterialScrollListener(settings_nested_scrollview, settings_toolbar)
+//        setupMaterialScrollListener(settings_nested_scrollview, settings_toolbar)
+        settings_nested_scrollview.background.applyColorFilter(getSecondaryBackgroundColor())
     }
 
     override fun onResume() {
         super.onResume()
-        setupToolbar(settings_toolbar, NavigationIcon.Arrow)
+//        setupToolbar(settings_toolbar, NavigationIcon.Arrow)
 
         setupPurchaseThankYou()
         setupCustomizeColors()

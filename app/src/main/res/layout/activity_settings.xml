@@ -6,452 +6,516 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/settings_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@null"
-        app:title="@string/settings"
-        app:titleTextAppearance="@style/AppTheme.ActionBar.TitleTextStyle" />
+<!--    <com.google.android.material.appbar.MaterialToolbar-->
+<!--        android:id="@+id/settings_toolbar"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="?attr/actionBarSize"-->
+<!--        android:background="@null"-->
+<!--        app:title="@string/settings"-->
+<!--        app:titleTextAppearance="@style/AppTheme.ActionBar.TitleTextStyle" />-->
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/settings_nested_scrollview"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:animateLayoutChanges="true"
         android:layout_marginHorizontal="15dp"
-        android:layout_marginTop="?attr/actionBarSize"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginVertical="5dp"
         android:background="@drawable/tile_background"
-        android:clipToOutline="true"
-        android:fillViewport="true"
-        android:scrollbars="vertical"
-        android:backgroundTint="@color/cardview_dark_background">
+        android:backgroundTint="@color/transparent"
+        android:clipToOutline="true">
 
-        <LinearLayout
-            android:id="@+id/settings_holder"
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/top_app_bar_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:background="@null">
 
-            <TextView
-                android:id="@+id/settings_color_customization_section_label"
-                style="@style/SettingsSectionLabelStyle"
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/main_app_bar_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/color_customization"
-                android:visibility="gone" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+                app:layout_constraintVertical_weight="100"
+                android:background="@null"
+                app:collapsedTitleGravity="left"
+                app:expandedTitleGravity="center|top"
+                app:title="@string/settings"
+                app:titleEnabled="true"
+                app:expandedTitleTextColor="@color/transparent"
+                app:titleCollapseMode="fade"
+                app:contentScrim="@color/transparent">
 
-            <include
-                android:id="@+id/settings_color_customization_divider"
-                layout="@layout/divider"
-                android:visibility="gone"/>
+                <TextView
+                    android:id="@+id/dialpad_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:paddingTop="40dp"
+                    android:paddingBottom="60dp"
+                    android:text="@string/settings"
+                    android:textAlignment="center"
+                    android:textColor="?android:attr/textColorPrimaryNoDisable"
+                    android:textSize="@dimen/dialpad_title_size"
+                    android:textStyle="bold"
+                    app:layout_collapseMode="pin" />
 
-            <TextView
-                android:id="@+id/settings_general_settings_label"
-                style="@style/SettingsSectionLabelStyle"
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/top_toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="64dp"
+                    android:layout_marginRight="6.5dp"
+                    android:layout_gravity="bottom"
+                    app:layout_collapseMode="pin"
+                    app:layout_scrollFlags="scroll|enterAlwaysCollapsed"
+                    app:logoAdjustViewBounds="false"
+                    app:navigationIconTint="#FFFFFF"
+                    app:titleTextAppearance="@style/AppTheme.ActionBar.TitleTextStyle" />
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/settings_nested_scrollview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:background="@drawable/tile_background"
+            android:clipToOutline="true"
+            android:fillViewport="true"
+            android:scrollbars="vertical"
+            android:backgroundTint="@color/cardview_dark_background">
+
+            <LinearLayout
+                android:id="@+id/settings_holder"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/product_sans_bold"
-                android:text="@string/general_settings"
-                tools:textStyle="bold" />
+                android:orientation="vertical">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/settings_color_customization_holder"
-                style="@style/SettingsHolderTextViewOneLinerStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="visible">
-
-                <com.simplemobiletools.commons.views.MyTextView
-                    android:id="@+id/settings_color_customization_label"
-                    style="@style/SettingsTextLabelStyle"
-                    android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/settings_color_customization_section_label"
+                    style="@style/SettingsSectionLabelStyle"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/customize_colors"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <RelativeLayout
-                android:id="@+id/settings_purchase_thank_you_holder"
-                style="@style/SettingsHolderTextViewOneLinerStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone">
-
-                <com.simplemobiletools.commons.views.MyTextView
-                    android:id="@+id/settings_purchase_thank_you_label"
-                    style="@style/SettingsTextLabelStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/purchase_simple_thank_you"
+                    android:text="@string/color_customization"
                     android:visibility="gone" />
 
-            </RelativeLayout>
+                <include
+                    android:id="@+id/settings_color_customization_divider"
+                    layout="@layout/divider"
+                    android:visibility="gone"/>
 
-            <RelativeLayout
-                android:id="@+id/settings_use_english_holder"
-                style="@style/SettingsHolderCheckboxStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.simplemobiletools.commons.views.MyAppCompatCheckbox
-                    android:id="@+id/settings_use_english"
-                    style="@style/SettingsCheckboxStyle"
+                <TextView
+                    android:id="@+id/settings_general_settings_label"
+                    style="@style/SettingsSectionLabelStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/use_english_language" />
+                    android:fontFamily="@font/product_sans_bold"
+                    android:text="@string/general_settings"
+                    tools:textStyle="bold" />
 
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/settings_language_holder"
-                style="@style/SettingsHolderTextViewStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.simplemobiletools.commons.views.MyTextView
-                    android:id="@+id/settings_language_label"
-                    style="@style/SettingsTextLabelStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/language" />
-
-                <com.simplemobiletools.commons.views.MyTextView
-                    android:id="@+id/settings_language"
-                    style="@style/SettingsTextValueStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/settings_language_label"
-                    tools:text="English" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/settings_manage_blocked_numbers_holder"
-                style="@style/SettingsHolderTextViewOneLinerStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.simplemobiletools.commons.views.MyTextView
-                    android:id="@+id/settings_manage_blocked_numbers_label"
-                    style="@style/SettingsTextLabelStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/manage_blocked_numbers" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/settings_change_date_time_format_holder"
-                style="@style/SettingsHolderTextViewOneLinerStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.simplemobiletools.commons.views.MyTextView
-                    android:id="@+id/settings_change_date_time_format_label"
-                    style="@style/SettingsTextLabelStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/change_date_and_time_format" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/settings_manage_speed_dial_holder"
-                style="@style/SettingsHolderTextViewOneLinerStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.simplemobiletools.commons.views.MyTextView
-                    android:id="@+id/settings_manage_speed_dial_label"
-                    style="@style/SettingsTextLabelStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/manage_speed_dial" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/settings_font_size_holder"
-                style="@style/SettingsHolderTextViewStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.simplemobiletools.commons.views.MyTextView
-                    android:id="@+id/settings_font_size_label"
-                    style="@style/SettingsTextLabelStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/font_size" />
-
-                <com.simplemobiletools.commons.views.MyTextView
-                    android:id="@+id/settings_font_size"
-                    style="@style/SettingsTextValueStyle"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/settings_color_customization_holder"
+                    style="@style/SettingsHolderTextViewOneLinerStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/settings_font_size_label"
-                    tools:text="@string/medium" />
+                    android:visibility="visible">
 
-            </RelativeLayout>
+                    <com.simplemobiletools.commons.views.MyTextView
+                        android:id="@+id/settings_color_customization_label"
+                        style="@style/SettingsTextLabelStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/customize_colors"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-            <RelativeLayout
-                android:id="@+id/settings_start_name_with_surname_holder"
-                style="@style/SettingsHolderCheckboxStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <com.simplemobiletools.commons.views.MyAppCompatCheckbox
-                    android:id="@+id/settings_start_name_with_surname"
-                    style="@style/SettingsCheckboxStyle"
+                <RelativeLayout
+                    android:id="@+id/settings_purchase_thank_you_holder"
+                    style="@style/SettingsHolderTextViewOneLinerStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/start_name_with_surname" />
+                    android:visibility="gone">
 
-            </RelativeLayout>
+                    <com.simplemobiletools.commons.views.MyTextView
+                        android:id="@+id/settings_purchase_thank_you_label"
+                        style="@style/SettingsTextLabelStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/purchase_simple_thank_you"
+                        android:visibility="gone" />
 
-            <RelativeLayout
-                android:id="@+id/settings_hide_dialpad_numbers_holder"
-                style="@style/SettingsHolderCheckboxStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                </RelativeLayout>
 
-                <com.simplemobiletools.commons.views.MyAppCompatCheckbox
-                    android:id="@+id/settings_hide_dialpad_numbers"
-                    style="@style/SettingsCheckboxStyle"
+                <RelativeLayout
+                    android:id="@+id/settings_use_english_holder"
+                    style="@style/SettingsHolderCheckboxStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.simplemobiletools.commons.views.MyAppCompatCheckbox
+                        android:id="@+id/settings_use_english"
+                        style="@style/SettingsCheckboxStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/use_english_language" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/settings_language_holder"
+                    style="@style/SettingsHolderTextViewStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.simplemobiletools.commons.views.MyTextView
+                        android:id="@+id/settings_language_label"
+                        style="@style/SettingsTextLabelStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/language" />
+
+                    <com.simplemobiletools.commons.views.MyTextView
+                        android:id="@+id/settings_language"
+                        style="@style/SettingsTextValueStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/settings_language_label"
+                        tools:text="English" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/settings_manage_blocked_numbers_holder"
+                    style="@style/SettingsHolderTextViewOneLinerStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.simplemobiletools.commons.views.MyTextView
+                        android:id="@+id/settings_manage_blocked_numbers_label"
+                        style="@style/SettingsTextLabelStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/manage_blocked_numbers" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/settings_change_date_time_format_holder"
+                    style="@style/SettingsHolderTextViewOneLinerStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.simplemobiletools.commons.views.MyTextView
+                        android:id="@+id/settings_change_date_time_format_label"
+                        style="@style/SettingsTextLabelStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/change_date_and_time_format" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/settings_manage_speed_dial_holder"
+                    style="@style/SettingsHolderTextViewOneLinerStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.simplemobiletools.commons.views.MyTextView
+                        android:id="@+id/settings_manage_speed_dial_label"
+                        style="@style/SettingsTextLabelStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/manage_speed_dial" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/settings_font_size_holder"
+                    style="@style/SettingsHolderTextViewStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.simplemobiletools.commons.views.MyTextView
+                        android:id="@+id/settings_font_size_label"
+                        style="@style/SettingsTextLabelStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/font_size" />
+
+                    <com.simplemobiletools.commons.views.MyTextView
+                        android:id="@+id/settings_font_size"
+                        style="@style/SettingsTextValueStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/settings_font_size_label"
+                        tools:text="@string/medium" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/settings_start_name_with_surname_holder"
+                    style="@style/SettingsHolderCheckboxStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.simplemobiletools.commons.views.MyAppCompatCheckbox
+                        android:id="@+id/settings_start_name_with_surname"
+                        style="@style/SettingsCheckboxStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/start_name_with_surname" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/settings_hide_dialpad_numbers_holder"
+                    style="@style/SettingsHolderCheckboxStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.simplemobiletools.commons.views.MyAppCompatCheckbox
+                        android:id="@+id/settings_hide_dialpad_numbers"
+                        style="@style/SettingsCheckboxStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hide_dialpad_numbers" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/settings_dialpad_vibration_holder"
+                    style="@style/SettingsHolderCheckboxStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.simplemobiletools.commons.views.MyAppCompatCheckbox
+                        android:id="@+id/settings_dialpad_vibration"
+                        style="@style/SettingsCheckboxStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/dialpad_vibrations" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/settings_dialpad_beeps_holder"
+                    style="@style/SettingsHolderCheckboxStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.simplemobiletools.commons.views.MyAppCompatCheckbox
+                        android:id="@+id/settings_dialpad_beeps"
+                        style="@style/SettingsCheckboxStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/dialpad_beeps" />
+
+                </RelativeLayout>
+
+                <include
+                    android:id="@+id/settings_general_settings_divider"
+                    layout="@layout/divider" />
+
+                <TextView
+                    android:id="@+id/settings_startup_label"
+                    style="@style/SettingsSectionLabelStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/hide_dialpad_numbers" />
+                    android:fontFamily="@font/product_sans_bold"
+                    android:text="@string/startup"
+                    tools:textStyle="bold" />
 
-            </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/settings_manage_tabs_holder"
+                    style="@style/SettingsHolderTextViewOneLinerStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-            <RelativeLayout
-                android:id="@+id/settings_dialpad_vibration_holder"
-                style="@style/SettingsHolderCheckboxStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                    <com.simplemobiletools.commons.views.MyTextView
+                        android:id="@+id/settings_manage_tabs"
+                        style="@style/SettingsTextLabelStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/manage_shown_tabs" />
 
-                <com.simplemobiletools.commons.views.MyAppCompatCheckbox
-                    android:id="@+id/settings_dialpad_vibration"
-                    style="@style/SettingsCheckboxStyle"
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/settings_default_tab_holder"
+                    style="@style/SettingsHolderTextViewStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.simplemobiletools.commons.views.MyTextView
+                        android:id="@+id/settings_default_tab_label"
+                        style="@style/SettingsTextLabelStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/default_tab_to_open" />
+
+                    <com.simplemobiletools.commons.views.MyTextView
+                        android:id="@+id/settings_default_tab"
+                        style="@style/SettingsTextValueStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/settings_default_tab_label"
+                        tools:text="@string/last_used_tab" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/settings_open_dialpad_at_launch_holder"
+                    style="@style/SettingsHolderCheckboxStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.simplemobiletools.commons.views.MyAppCompatCheckbox
+                        android:id="@+id/settings_open_dialpad_at_launch"
+                        style="@style/SettingsCheckboxStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/open_dialpad_by_default" />
+
+                </RelativeLayout>
+
+                <include
+                    android:id="@+id/settings_startup_divider"
+                    layout="@layout/divider" />
+
+                <TextView
+                    android:id="@+id/settings_calls_label"
+                    style="@style/SettingsSectionLabelStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/dialpad_vibrations" />
+                    android:fontFamily="@font/product_sans_bold"
+                    android:text="@string/calls"
+                    tools:textStyle="bold" />
 
-            </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/settings_group_subsequent_calls_holder"
+                    style="@style/SettingsHolderCheckboxStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-            <RelativeLayout
-                android:id="@+id/settings_dialpad_beeps_holder"
-                style="@style/SettingsHolderCheckboxStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                    <com.simplemobiletools.commons.views.MyAppCompatCheckbox
+                        android:id="@+id/settings_group_subsequent_calls"
+                        style="@style/SettingsCheckboxStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/group_subsequent_calls" />
 
-                <com.simplemobiletools.commons.views.MyAppCompatCheckbox
-                    android:id="@+id/settings_dialpad_beeps"
-                    style="@style/SettingsCheckboxStyle"
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/settings_show_call_confirmation_holder"
+                    style="@style/SettingsHolderCheckboxStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.simplemobiletools.commons.views.MyAppCompatCheckbox
+                        android:id="@+id/settings_show_call_confirmation"
+                        style="@style/SettingsCheckboxStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/show_call_confirmation_dialog" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/settings_disable_proximity_sensor_holder"
+                    style="@style/SettingsHolderCheckboxStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.simplemobiletools.commons.views.MyAppCompatCheckbox
+                        android:id="@+id/settings_disable_proximity_sensor"
+                        style="@style/SettingsCheckboxStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/disable_proximity_sensor" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/settings_disable_swipe_to_answer_holder"
+                    style="@style/SettingsHolderCheckboxStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.simplemobiletools.commons.views.MyAppCompatCheckbox
+                        android:id="@+id/settings_disable_swipe_to_answer"
+                        style="@style/SettingsCheckboxStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/disable_swipe_to_answer" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/settings_always_show_fullscreen_holder"
+                    style="@style/SettingsHolderCheckboxStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.simplemobiletools.commons.views.MyAppCompatCheckbox
+                        android:id="@+id/settings_always_show_fullscreen"
+                        style="@style/SettingsCheckboxStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/show_incoming_calls_full_screen" />
+
+                </RelativeLayout>
+
+                <include
+                    android:id="@+id/settings_migration_divider"
+                    layout="@layout/divider" />
+
+                <TextView
+                    android:id="@+id/settings_migration_section_label"
+                    style="@style/SettingsSectionLabelStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/dialpad_beeps" />
+                    android:fontFamily="@font/product_sans_bold"
+                    android:text="@string/migrating"
+                    tools:textStyle="bold" />
 
-            </RelativeLayout>
-
-            <include
-                android:id="@+id/settings_general_settings_divider"
-                layout="@layout/divider" />
-
-            <TextView
-                android:id="@+id/settings_startup_label"
-                style="@style/SettingsSectionLabelStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/product_sans_bold"
-                android:text="@string/startup"
-                tools:textStyle="bold" />
-
-            <RelativeLayout
-                android:id="@+id/settings_manage_tabs_holder"
-                style="@style/SettingsHolderTextViewOneLinerStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.simplemobiletools.commons.views.MyTextView
-                    android:id="@+id/settings_manage_tabs"
-                    style="@style/SettingsTextLabelStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/manage_shown_tabs" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/settings_default_tab_holder"
-                style="@style/SettingsHolderTextViewStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.simplemobiletools.commons.views.MyTextView
-                    android:id="@+id/settings_default_tab_label"
-                    style="@style/SettingsTextLabelStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/default_tab_to_open" />
-
-                <com.simplemobiletools.commons.views.MyTextView
-                    android:id="@+id/settings_default_tab"
-                    style="@style/SettingsTextValueStyle"
+                <RelativeLayout
+                    android:id="@+id/settings_export_calls_holder"
+                    style="@style/SettingsHolderTextViewOneLinerStyle"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/settings_default_tab_label"
-                    tools:text="@string/last_used_tab" />
+                    android:layout_height="wrap_content">
 
-            </RelativeLayout>
+                    <com.simplemobiletools.commons.views.MyTextView
+                        android:id="@+id/settings_export_calls"
+                        style="@style/SettingsTextLabelStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/export_call_history" />
 
-            <RelativeLayout
-                android:id="@+id/settings_open_dialpad_at_launch_holder"
-                style="@style/SettingsHolderCheckboxStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                </RelativeLayout>
 
-                <com.simplemobiletools.commons.views.MyAppCompatCheckbox
-                    android:id="@+id/settings_open_dialpad_at_launch"
-                    style="@style/SettingsCheckboxStyle"
+                <RelativeLayout
+                    android:id="@+id/settings_import_calls_holder"
+                    style="@style/SettingsHolderTextViewOneLinerStyle"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/open_dialpad_by_default" />
+                    android:layout_height="wrap_content">
 
-            </RelativeLayout>
+                    <com.simplemobiletools.commons.views.MyTextView
+                        android:id="@+id/settings_import_calls"
+                        style="@style/SettingsTextLabelStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/import_call_history" />
 
-            <include
-                android:id="@+id/settings_startup_divider"
-                layout="@layout/divider" />
+                </RelativeLayout>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
 
-            <TextView
-                android:id="@+id/settings_calls_label"
-                style="@style/SettingsSectionLabelStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/product_sans_bold"
-                android:text="@string/calls"
-                tools:textStyle="bold" />
-
-            <RelativeLayout
-                android:id="@+id/settings_group_subsequent_calls_holder"
-                style="@style/SettingsHolderCheckboxStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.simplemobiletools.commons.views.MyAppCompatCheckbox
-                    android:id="@+id/settings_group_subsequent_calls"
-                    style="@style/SettingsCheckboxStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/group_subsequent_calls" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/settings_show_call_confirmation_holder"
-                style="@style/SettingsHolderCheckboxStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.simplemobiletools.commons.views.MyAppCompatCheckbox
-                    android:id="@+id/settings_show_call_confirmation"
-                    style="@style/SettingsCheckboxStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/show_call_confirmation_dialog" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/settings_disable_proximity_sensor_holder"
-                style="@style/SettingsHolderCheckboxStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.simplemobiletools.commons.views.MyAppCompatCheckbox
-                    android:id="@+id/settings_disable_proximity_sensor"
-                    style="@style/SettingsCheckboxStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/disable_proximity_sensor" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/settings_disable_swipe_to_answer_holder"
-                style="@style/SettingsHolderCheckboxStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.simplemobiletools.commons.views.MyAppCompatCheckbox
-                    android:id="@+id/settings_disable_swipe_to_answer"
-                    style="@style/SettingsCheckboxStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/disable_swipe_to_answer" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/settings_always_show_fullscreen_holder"
-                style="@style/SettingsHolderCheckboxStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.simplemobiletools.commons.views.MyAppCompatCheckbox
-                    android:id="@+id/settings_always_show_fullscreen"
-                    style="@style/SettingsCheckboxStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/show_incoming_calls_full_screen" />
-
-            </RelativeLayout>
-
-            <include
-                android:id="@+id/settings_migration_divider"
-                layout="@layout/divider" />
-
-            <TextView
-                android:id="@+id/settings_migration_section_label"
-                style="@style/SettingsSectionLabelStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/product_sans_bold"
-                android:text="@string/migrating"
-                tools:textStyle="bold" />
-
-            <RelativeLayout
-                android:id="@+id/settings_export_calls_holder"
-                style="@style/SettingsHolderTextViewOneLinerStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.simplemobiletools.commons.views.MyTextView
-                    android:id="@+id/settings_export_calls"
-                    style="@style/SettingsTextLabelStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/export_call_history" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/settings_import_calls_holder"
-                style="@style/SettingsHolderTextViewOneLinerStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.simplemobiletools.commons.views.MyTextView
-                    android:id="@+id/settings_import_calls"
-                    style="@style/SettingsTextLabelStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/import_call_history" />
-
-            </RelativeLayout>
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
