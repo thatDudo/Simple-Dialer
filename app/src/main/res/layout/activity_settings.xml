@@ -20,7 +20,7 @@
         android:orientation="vertical"
         android:animateLayoutChanges="true"
         android:layout_marginHorizontal="15dp"
-        android:layout_marginVertical="5dp"
+        android:layout_marginBottom="15dp"
         android:background="@drawable/tile_background"
         android:backgroundTint="@color/transparent"
         android:clipToOutline="true">
@@ -86,7 +86,6 @@
             android:background="@drawable/tile_background"
             android:clipToOutline="true"
             android:fillViewport="true"
-            android:scrollbars="vertical"
             android:backgroundTint="@color/cardview_dark_background">
 
             <LinearLayout
