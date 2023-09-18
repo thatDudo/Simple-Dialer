@@ -55,6 +55,7 @@
                         app:expandedTitleGravity="center|top"
                         app:title="@string/call_history_tab"
                         app:titleEnabled="true"
+                        app:collapsedTitleTextAppearance="@style/ActionBar.MyTitleStyle"
                         app:expandedTitleTextColor="@color/transparent"
                         app:titleCollapseMode="fade"
                         app:contentScrim="@color/transparent">

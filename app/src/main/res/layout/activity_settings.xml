@@ -45,6 +45,7 @@
                 app:collapsedTitleGravity="left"
                 app:expandedTitleGravity="center|top"
                 app:title="@string/settings"
+                app:collapsedTitleTextAppearance="@style/ActionBar.MyTitleStyle"
                 app:titleEnabled="true"
                 app:expandedTitleTextColor="@color/transparent"
                 app:titleCollapseMode="fade"
