@@ -173,9 +173,14 @@ class DialpadActivity : SimpleActivity() {
     override fun onResume() {
         super.onResume()
 //        updateTextColors(dialpad_holder)
+        val backgroundColor = getProperBackgroundColor()
+        val secondaryBackgroundColor = getSecondaryBackgroundColor()
+
         dialpad_clear_char.applyColorFilter(getProperTextColor())
-        updateNavigationBarColor(getProperBackgroundColor())
+        updateNavigationBarColor(backgroundColor)
         setupToolbar(dialpad_toolbar, NavigationIcon.Arrow)
+        dialpad_list.background.applyColorFilter(secondaryBackgroundColor)
+        dialpad_wrapper.background.applyColorFilter(secondaryBackgroundColor)
     }
 
     private fun setupOptionsMenu() {

@@ -143,8 +143,8 @@ class MainActivity : SimpleActivity() {
 
         updateMenuColors()
         val properPrimaryColor = getProperPrimaryColor()
-        val dialpadIcon = resources.getColoredDrawableWithColor(R.drawable.ic_dialpad_vector, properPrimaryColor.getContrastColor())
         val backgroundColor = getSecondaryBackgroundColor()
+        val dialpadIcon = resources.getColoredDrawableWithColor(R.drawable.ic_dialpad_vector, properPrimaryColor.getContrastColor())
         main_dialpad_button.setImageDrawable(dialpadIcon)
 
         updateTextColors(main_holder)

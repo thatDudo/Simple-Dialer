@@ -49,7 +49,7 @@
             android:textCursorDrawable="@null"
             android:textSize="28dp"
             android:visibility="visible"
-            app:layout_constraintBottom_toTopOf="@+id/dialpad_wrapper"
+            app:layout_constraintTop_toTopOf="parent"
             tools:layout_editor_absoluteX="40dp" />
 
         <com.simplemobiletools.commons.views.MyRecyclerView
@@ -105,6 +105,7 @@
             tools:layout_editor_absoluteY="54dp" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@id/dialpad_wrapper"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="15dp"
@@ -150,7 +151,7 @@
                 android:contentDescription="@string/call_number"
                 android:padding="@dimen/normal_margin"
                 android:src="@drawable/ic_phone_two_vector"
-                android:visibility="visible"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/dialpad_call_button"
                 app:layout_constraintStart_toStartOf="parent"
