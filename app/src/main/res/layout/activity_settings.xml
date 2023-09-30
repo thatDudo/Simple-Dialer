@@ -23,8 +23,7 @@
         android:layout_marginHorizontal="15dp"
         android:layout_marginBottom="15dp"
         android:background="@drawable/tile_background"
-        android:backgroundTint="@color/transparent"
-        android:clipToOutline="true">
+        android:backgroundTint="@color/transparent">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/top_app_bar_layout"

@@ -151,11 +151,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/medium_margin"
+        android:background="@drawable/ripple_all_corners"
         android:contentDescription="@string/five"
         app:layout_constraintBottom_toTopOf="@+id/dialpad_8_holder"
         app:layout_constraintEnd_toStartOf="@+id/dialpad_6_holder"
-        app:layout_constraintStart_toEndOf="@+id/dialpad_4_holder"
-        android:background="@drawable/ripple_all_corners">
+        app:layout_constraintStart_toEndOf="@+id/dialpad_4_holder">
 
         <com.simplemobiletools.commons.views.MyTextView
             android:id="@+id/dialpad_5"

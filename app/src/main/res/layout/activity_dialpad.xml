@@ -160,7 +160,7 @@
                 android:id="@+id/dialpad_clear_char"
                 android:layout_width="@dimen/dialpad_button_size"
                 android:layout_height="@dimen/dialpad_button_size"
-                android:background="@drawable/ripple_all_corners"
+                android:alpha="0.5"
                 android:layoutDirection="ltr"
                 android:paddingStart="@dimen/normal_margin"
                 android:paddingEnd="@dimen/normal_margin"
