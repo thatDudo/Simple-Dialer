@@ -43,14 +43,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="40dp"
+            android:backgroundTint="#00000000"
             android:inputType="phone"
             android:layoutDirection="ltr"
             android:textCursorDrawable="@null"
             android:textSize="28dp"
             android:visibility="visible"
             app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="40dp"
-            android:backgroundTint="#00000000"/>
+            tools:layout_editor_absoluteX="40dp" />
 
         <com.simplemobiletools.commons.views.MyRecyclerView
             android:id="@+id/dialpad_list"
