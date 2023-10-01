@@ -49,7 +49,8 @@
             android:textSize="28dp"
             android:visibility="visible"
             app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="40dp" />
+            tools:layout_editor_absoluteX="40dp"
+            android:backgroundTint="#00000000"/>
 
         <com.simplemobiletools.commons.views.MyRecyclerView
             android:id="@+id/dialpad_list"
@@ -76,9 +77,11 @@
             android:layout_height="0dp"
             android:gravity="top"
             android:paddingTop="@dimen/medium_margin"
+            android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@+id/dialpad_divider"
             app:layout_constraintEnd_toEndOf="@+id/dialpad_list"
-            app:layout_constraintTop_toTopOf="@+id/dialpad_list">
+            app:layout_constraintTop_toTopOf="@+id/dialpad_list"
+            tools:visibility="gone">
 
         </com.reddit.indicatorfastscroll.FastScrollerView>
 
@@ -87,9 +90,11 @@
             android:layout_width="@dimen/fab_size"
             android:layout_height="0dp"
             android:layout_marginEnd="@dimen/activity_margin"
+            android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@+id/dialpad_divider"
             app:layout_constraintEnd_toStartOf="@+id/letter_fastscroller"
-            app:layout_constraintTop_toTopOf="@+id/dialpad_list">
+            app:layout_constraintTop_toTopOf="@+id/dialpad_list"
+            tools:visibility="gone">
 
         </com.reddit.indicatorfastscroll.FastScrollerThumbView>
 
