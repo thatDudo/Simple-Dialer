@@ -52,12 +52,12 @@
                         app:layout_constraintVertical_weight="100"
                         android:background="@null"
                         app:collapsedTitleGravity="left"
-                        app:expandedTitleGravity="center|top"
+                        app:expandedTitleGravity="left|top"
                         app:title="@string/call_history_tab"
                         app:titleEnabled="true"
                         app:collapsedTitleTextAppearance="@style/ActionBar.MyTitleStyle"
                         app:expandedTitleTextColor="@color/transparent"
-                        app:titleCollapseMode="fade"
+                        app:titleCollapseMode="scale"
                         app:contentScrim="@color/transparent">
 
                         <TextView
@@ -73,7 +73,7 @@
                             android:textColor="?android:attr/textColorPrimaryNoDisable"
                             android:textSize="@dimen/dialpad_title_size"
                             android:textStyle="bold"
-                            app:layout_collapseMode="pin" />
+                            app:layout_collapseMode="pin"/>
 
                         <com.google.android.material.appbar.MaterialToolbar
                             android:id="@+id/top_toolbar"
